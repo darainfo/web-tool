@@ -1,0 +1,78 @@
+@use "sass:math";
+@import "~bootstrap/scss/functions";
+
+$custom-border-color: #{$border-color};
+
+:root {
+  $bs-bg: #151521;
+  $custom-body-color: #3b3b3b;
+  $custom-font-color: #{$body-color};
+  $custom-panel-bg: #ffffff;
+  $custom-panel-color: #607080;
+  $custom-panel-header-active-bg: #f0f1ff;
+  $custom-panel-header-active-color: #3b3b3b;
+  $custom-border-color: #{$border-color};
+
+  --#{$prefix}body-bg: #{$bs-bg};
+  --#{$prefix}body-color: #{$custom-body-color};
+  --#{$prefix}border-color: #{$custom-border-color};
+  --#{$prefix}link-hover-color-rgb: #ddd;
+
+  //main
+  --logo-color: #000865;
+
+  //scroll
+  --scrollbar-track-bg: #eaeaea;
+  --scrollbar-thumb-bg: #b3b3b3;
+  --scrollbar-thumb-hover-bg: #757575;
+
+  // card
+  --#{$prefix}card-bg: #{$custom-panel-bg};
+  --#{$prefix}card-cap-bg: #{$custom-panel-bg};
+  --#{$prefix}card-shadow-color: rgba(183, 192, 206, 0.2);
+
+  // side bar
+  --sidebar-bg: #{$custom-panel-bg};
+  --sidebar-link-color: #25396f;
+  --sidebar-link-hover-bg: rgb(240, 241, 245);
+  --sidebar-link-hover-color: #179b9d;
+  --sidebar-link-active-color: #0739c3;
+
+  // dropdown
+  --#{$prefix}dropdown-color: #{$body-color};
+  --#{$prefix}dropdown-bg: #{$custom-panel-bg};
+  --#{$prefix}dropdown-link-color: #{$body-color};
+  --ct-dropdown-border-color: #{$custom-border-color};
+  --ct-dropdown-divider-bg: #{$custom-border-color};
+  --#{$prefix}dropdown-link-active-color: #{$custom-font-color};
+  --#{$prefix}dropdown-link-active-bg: #435ebe;
+  --#{$prefix}border-color-translucent: #{$custom-border-color};
+
+  // modal
+  --ct-modal-content-bg: #{$custom-panel-bg};
+
+  // toast
+  --#{$prefix}toast-bg: #{$custom-panel-bg};
+  --#{$prefix}toast-header-bg: #{$custom-panel-bg};
+
+  //form
+  --custom-form-disabled-bg: #e9ecef;
+  --form-file-button-bg: #e9ecef;
+  --form-textarea-title-bg: #e9ecef;
+
+  //accordion
+  --custom-accordion-active-bg: #{$custom-panel-header-active-bg};
+  --custom-accordion-active-color: #{$custom-panel-header-active-color};
+
+  // table
+  --ct-thead-border-color: #{$custom-border-color};
+
+  // layout
+  --horizontal-header-bg: #{$white};
+  --horizontal-navbar-bg: #{$primary};
+  --horizontal-submenu-bg: #{$white};
+  --horizontal-submenu-link-color: #{$gray-600};
+  --horizontal-submenu-link-hover-bg: #1b1b28;
+  --horizontal-submenu-link-hover-color: #187de4;
+  --horizontal-submenu-shadow-color: rgba(100, 100, 100, 0.1);
+}

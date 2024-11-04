@@ -1,0 +1,71 @@
+// Apexcharts
+.apexcharts-text tspan {
+  fill: $body-color !important;
+}
+.apexcharts-legend-text {
+  color: $body-color !important;
+}
+
+// Toggle theme
+.theme-toggle {
+  color: #9899ac;
+}
+
+// Pricing Card
+.pricing {
+  .card {
+    border: none;
+    box-shadow: none;
+  }
+}
+
+// Note
+.note-editing-area .note-editable {
+  background-color: white;
+}
+// DataTable
+.dataTable-input {
+  background-color: $input-bg;
+  border-color: $input-border-color;
+  transition: all 0.2s ease-in-out;
+
+  &:focus {
+    background-color: $input-focus-bg;
+    border-color: $input-focus-border-color;
+    color: $input-focus-color;
+  }
+}
+
+.btn-close {
+  filter: var(--#{$prefix}btn-close-white-filter);
+}
+
+.accordion-button::after {
+  --#{$prefix}accordion-btn-icon: #{escape-svg($accordion-button-icon-dark)};
+  --#{$prefix}accordion-btn-active-icon: #{escape-svg($accordion-button-active-icon-dark)};
+}
+
+// override selector
+// see original on mixins\_forms.scss
+@mixin form-validation-state-selector($state) {
+  @if ($state == "valid" or $state == "invalid") {
+    .was-validated :#{$state},
+    .is-#{$state} {
+      @content;
+    }
+  } @else {
+    .is-#{$state} {
+      @content;
+    }
+  }
+}
+
+// to fix feedback message on input group
+@each $state in map-keys($form-validation-states) {
+  @include form-validation-state-selector($state) {
+    ~ .#{$state}-feedback,
+    ~ .#{$state}-tooltip {
+      display: block;
+    }
+  }
+}

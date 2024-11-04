@@ -1,0 +1,92 @@
+body.dark {
+    $bs-bg: #1d212a;
+    $custom-body-color: #c6cddb;
+    $custom-font-color: #b0b2b5;
+    $custom-panel-bg: #162342;
+    $custom-panel-color: #92929f;
+    $custom-panel-header-active-bg: #213d81;
+    $custom-panel-header-active-color: #c6cddb;
+    $custom-border-color: #41444c;
+
+    $primary-text-emphasis-dark: tint-color($primary, 40%) !default;
+    $accordion-icon-color-dark: $primary-text-emphasis-dark !default;
+    $accordion-icon-active-color-dark: $primary-text-emphasis-dark !default;
+    $accordion-button-icon-dark: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-color-dark}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !default;
+    $accordion-button-active-icon-dark: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-active-color-dark}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !default;
+
+    --#{$prefix}body-bg: #{$bs-bg};
+    --#{$prefix}body-bg-rgb: #{to-rgb($bs-bg)};
+    --#{$prefix}body-color: #{$custom-body-color};
+    --#{$prefix}border-color: #{$custom-border-color};
+    --#{$prefix}heading-color: #{$custom-body-color};
+    --#{$prefix}secondary-color: #{$custom-font-color};
+    --#{$prefix}link-opacity: 1;
+    --#{$prefix}link-color: #8e9ed8;
+    --#{$prefix}link-color-rgb: #{to-rgb(#8e9ed8)};
+    --#{$prefix}link-decoration: #{$link-decoration};
+
+    --#{$prefix}link-hover-color: #a5b9ff;
+    --#{$prefix}link-hover-color-rgb: #{to-rgb(#a5b9ff)};
+    --#{$prefix}tertiary-bg: #{$bs-bg};
+
+    //main
+    --logo-color: #7ba7ff;
+
+    //scroll
+    --scrollbar-track-bg: #eaeaea;
+    --scrollbar-thumb-bg: #757575;
+    --scrollbar-thumb-hover-bg: #908f8f;
+
+    // card
+    --#{$prefix}card-bg: #{$custom-panel-bg};
+    --#{$prefix}card-cap-bg: #{$custom-panel-bg};
+    --#{$prefix}card-shadow-color: rgba(22, 22, 22, 0.2);
+
+    // side bar
+    --sidebar-bg: #{$custom-panel-bg};
+    --sidebar-link-color: #{$custom-font-color};
+    --sidebar-link-hover-bg: #282839;
+    --sidebar-link-hover-color: #f5f5f5;
+    --sidebar-link-active-color: #5d88ff;
+
+    // dropdown
+    --#{$prefix}dropdown-color: #{$custom-panel-color};
+    --#{$prefix}dropdown-bg: #{$custom-panel-bg};
+    --#{$prefix}dropdown-link-color: #{$custom-panel-color};
+    --ct-dropdown-border-color: #{$custom-border-color};
+    --ct-dropdown-divider-bg: #363e56;
+    --#{$prefix}dropdown-link-active-color: #{$custom-font-color};
+    --#{$prefix}dropdown-link-active-bg: #435ebe;
+    --#{$prefix}border-color-translucent: #{$custom-border-color};
+
+    // modal
+    --ct-modal-content-bg: #{$custom-panel-bg};
+
+    // toast
+    --#{$prefix}toast-bg: #{$custom-panel-bg};
+    --#{$prefix}toast-header-bg: #{$custom-panel-bg};
+
+    // form
+    --custom-form-disabled-bg: #878787;
+    --form-file-button-bg: #2b3035;
+    --form-textarea-title-bg: #2b3035;
+
+    //accordion
+    --custom-accordion-active-bg: #{$custom-panel-header-active-bg};
+    --custom-accordion-active-color: #{$custom-panel-header-active-color};
+
+    // table
+    --ct-thead-border-color: #8b8c8f;
+
+    // layout
+    --horizontal-header-bg: $bs-bg;
+    --horizontal-navbar-bg: #162342;
+    --horizontal-submenu-bg: #000000;
+    --horizontal-submenu-link-color: #{$gray-200};
+    --horizontal-submenu-link-hover-bg: #1b1b28;
+    --horizontal-submenu-link-hover-color: #187de4;
+    --horizontal-submenu-shadow-color: rgba(100, 100, 100, 0.1);
+
+    // Additional dark-mode CSS
+    @import "./dara-dark";
+}

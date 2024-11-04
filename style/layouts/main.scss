@@ -1,0 +1,245 @@
+#mainContainer:not(.layout-horizontal) {
+  --main-lr-padding: 1.5rem;
+  --main-header-height: 58px;
+
+  margin-left: 300px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  .main-header {
+    padding: 0.5rem var(--main-lr-padding);
+    height: var(--main-header-height);
+    width: 100%;
+    border-bottom: 1px solid var(--#{$prefix}border-color);
+    background: var(--#{$prefix}body-bg);
+    position: fixed;
+    z-index: 10;
+    top: 0px;
+  }
+
+  @media screen and (max-width: 1199px) {
+    margin-left: 0;
+  }
+
+  .main-content {
+    padding: var(--main-lr-padding);
+    //padding-top: calc(var(--main-header-height) + var(--main-lr-padding));
+    flex-grow: 1;
+    margin-top: var(--main-header-height);
+  }
+}
+
+.main-header {
+  .top-leftbar {
+    padding: 0.5rem 1.5rem 0;
+    font-size: 2rem;
+    font-weight: bold;
+    height: 58px;
+    background: var(--#{$prefix}body-bg);
+    border-bottom: 1px solid var(--#{$prefix}border-color);
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    min-width: 300px;
+    max-width: calc(100% - 230px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: normal;
+    display: inline-block;
+    white-space: nowrap;
+
+    .logo {
+      margin-left: 2rem;
+      a {
+        color: var(--logo-color);
+
+        &:hover {
+          color: var(--#{$prefix}link-hover-color);
+        }
+      }
+    }
+
+    .sidebar-toggle {
+      .bi-justify::before {
+        vertical-align: middle;
+        padding-bottom: 10px;
+      }
+    }
+
+    img {
+      height: 1.2rem;
+    }
+  }
+
+  .top-rightbar {
+    position: fixed;
+    right: 24px;
+
+    > ul > li {
+      padding-left: 1.5rem;
+    }
+
+    .bi::before,
+    [class^="bi-"]::before,
+    [class*=" bi-"]::before {
+      vertical-align: sub;
+    }
+  }
+
+  .navbar-nav {
+    flex-direction: row;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    width: auto;
+    right: 0px;
+    margin-top: 8px !important;
+    min-width: 12rem;
+  }
+}
+
+.page-heading {
+  h3 {
+    font-weight: bold;
+  }
+}
+.page-title-headings {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  h3 {
+    margin-bottom: 0;
+    margin-right: 1rem;
+  }
+  .breadcrumb {
+    margin-bottom: 0;
+  }
+}
+a {
+  text-decoration: none;
+}
+
+.layout-navbar {
+  --navbar-height: 90px;
+
+  footer {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+.layout-navbar.navbar-fixed {
+  display: block !important;
+}
+.navbar-fixed > header {
+  display: unset;
+  height: var(--navbar-height);
+}
+.navbar-fixed .navbar-top {
+  position: sticky;
+  background-color: var(--#{$prefix}body-bg);
+  z-index: 9;
+  top: 0;
+  width: inherit;
+}
+.navbar {
+  height: var(--navbar-height);
+  padding: 1.5rem;
+  .navbar-brand img {
+    height: 1.5rem;
+  }
+  .user-menu img {
+    width: 39px;
+    height: 39px;
+  }
+
+  &.navbar-header {
+    li {
+      display: flex;
+      align-items: center;
+      &.nav-icon {
+        margin-right: 0.4rem;
+        .nav-link {
+          display: block;
+          padding: 0.4rem;
+          border-radius: 50%;
+          &:hover {
+            background-color: $gray-200;
+          }
+        }
+      }
+    }
+    .dropdown > a {
+      color: $gray-600;
+      font-weight: 600;
+
+      svg {
+        height: 24px;
+        width: 24px;
+      }
+      &:after {
+        display: none;
+      }
+    }
+  }
+}
+
+.navbar-top {
+  .notification-dropdown {
+    min-width: 20rem;
+  }
+  .notification-item {
+    margin-bottom: 0.4rem;
+    a {
+      color: $body-color;
+    }
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .notification-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    i {
+      vertical-align: -moz-middle-with-baseline;
+      font-size: 20px;
+    }
+  }
+}
+
+#topbarUserDropdown:after {
+  margin-left: 1rem;
+}
+
+.menu-inactive {
+  > #mainContainer {
+    margin-left: 0px;
+  }
+  > #sidebarContainer {
+    position: fixed;
+    left: -300px;
+  }
+}
+.menu-active {
+  > #mainContainer {
+    margin-left: 300px;
+  }
+  > #sidebarContainer {
+    position: fixed;
+    left: 0px;
+    z-index: 10;
+  }
+
+  @media screen and (max-width: 1024px) {
+    > #mainContainer {
+      margin-left: 0px;
+    }
+  }
+}

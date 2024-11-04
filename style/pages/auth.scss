@@ -1,0 +1,60 @@
+@import "../variables";
+
+body {
+  background-color: var(--#{$prefix}body-bg);
+}
+#auth-page {
+  height: 100vh;
+  overflow-x: hidden;
+
+  .auth-bg {
+    height: 100%;
+    background: $page-auth-login-bg;
+  }
+  .auth-form {
+    padding: 0px 5rem;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+    > div {
+      width: 100%;
+    }
+
+    .auth-title {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+    .auth-subtitle {
+      font-size: 1.7rem;
+      line-height: 2.5rem;
+      color: #a8aebb;
+    }
+    .auth-logo {
+      min-height: 3rem;
+
+      @media screen and (max-width: 1399.9px) {
+        min-height: 3rem;
+      }
+      @media screen and (max-width: 767px) {
+        min-height: 1rem;
+      }
+      @media screen and (max-width: 576px) {
+        min-height: 1rem;
+      }
+      img {
+        height: 2rem;
+      }
+    }
+    @media screen and (max-width: 1399.9px) {
+      padding: 0 3rem;
+    }
+    @media screen and (max-width: 767px) {
+      padding: 0 5rem;
+    }
+    @media screen and (max-width: 576px) {
+      padding: 0rem 3rem;
+    }
+  }
+}

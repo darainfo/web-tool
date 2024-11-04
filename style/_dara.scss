@@ -1,0 +1,74 @@
+/*
+* 
+* File: dara.scss
+*
+* If you want to edit the components, just go to _variables.scss
+*/
+
+.text-ellipsis {
+  display: inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+  max-width: calc(100% - 0px);
+  overflow: hidden;
+}
+
+// 1. Mixins
+@import "./mixins/navbar";
+
+// 2. Bootstrap Components Override
+
+// - 2.2. Avatar
+@import "./components/avatar";
+
+// - 2.3. Badge
+@import "./components/badge";
+
+// - 2.4. Buttons
+@import "./components/buttons";
+
+// - 2.5. breadcrumb
+@import "./components/breadcrumb";
+
+// - 2.6. carousel
+@import "./components/carousel";
+
+// - 2.7. card
+@import "./components/card";
+
+// - 2.8. divider
+@import "./components/divider";
+
+// - 2.9. dropdowns
+@import "./components/dropdowns";
+
+// - 2.10. forms
+@import "./components/forms";
+
+// - 2.11. modal
+@import "./components/modal";
+
+// - 2.13. navs
+@import "./components/navs";
+
+// - 2.15. pagination
+@import "./components/pagination";
+
+// - 2.16. table
+@import "./components/table";
+
+// - 2.17. progress
+@import "./components/progress";
+
+// - 2.18. icons
+@import "./components/icons";
+
+// - 4.0 Layout
+@import "./layouts/sidebar";
+@import "./layouts/main";
+@import "./layouts/horizontal-main";
+@import "./layouts/navbar";
+
+// - 5.0 Utilities
+@import "./utilities";

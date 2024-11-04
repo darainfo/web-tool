@@ -1,0 +1,55 @@
+// Import dara Variables
+
+@import "./variables";
+@import "./variables-light.scss";
+
+// Bootstrap + Icons
+$bootstrap-icons-font-src: url("~bootstrap-icons/font/fonts/bootstrap-icons.woff2") format("woff") !default;
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap-icons/font/bootstrap-icons";
+@import "themes/dark/variables-dark";
+
+.shadow {
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: var(--scrollbar-thumb-bg) var(--scrollbar-thumb-hover-bg);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  outline: none;
+  border-radius: 10px;
+  box-shadow: inset 6px 6px 0 var(--scrollbar-thumb-bg);
+  border: 3px solid transparent;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  border: 3px solid transparent;
+  box-shadow: inset 6px 6px 0 var(--scrollbar-thumb-hover-bg);
+}
+
+// Import fonts
+@import "./fonts";
+
+// dara CSS
+@import "./dara";
+
+.btn-example > .btn,
+.btn-example > .btn-group {
+  margin: 0.25rem 0.125rem;
+}
