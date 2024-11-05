@@ -1,4 +1,8 @@
 <script>
+import { routes } from "@/routes/menuRoutes";
+
+console.log("routes : ", routes);
+
 export default {
   props: {
     copy: {
@@ -17,12 +21,7 @@ export default {
   <div class="sidebar-wrapper">
     <div class="sidebar-menu-wrapper">
       <div class="sidebar-search">
-        <input
-          type="text"
-          id="sideMenuSearch"
-          class="form-control"
-          placeholder="Menu search."
-        />
+        <input type="text" id="sideMenuSearch" class="form-control" placeholder="Menu search." />
       </div>
       <div class="sidebar-menu">
         <div class="wrapper">
@@ -40,6 +39,12 @@ export default {
 
               <li>
                 <RouterLink to="/text/caseChange">Case Change</RouterLink>
+              </li>
+              <li>
+                <RouterLink to="/text/textSize">Case textSize</RouterLink>
+              </li>
+              <li>
+                <RouterLink to="/text/textSort">Case textSort</RouterLink>
               </li>
             </ul>
           </nav>

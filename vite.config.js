@@ -30,12 +30,7 @@ const modulesToCopy = {
 const copyModules = Object.keys(modulesToCopy).map((moduleName) => {
   const withDist = modulesToCopy[moduleName];
   return {
-    src: normalizePath(
-      resolve(
-        __dirname,
-        `./node_modules/${moduleName}${withDist ? "/dist" : ""}`
-      )
-    ),
+    src: normalizePath(resolve(__dirname, `./node_modules/${moduleName}${withDist ? "/dist" : ""}`)),
     dest: "assets/extensions",
     rename: moduleName,
   };
@@ -52,18 +47,11 @@ export default defineConfig((env) => ({
           dest: "assets",
         },
         {
-          src: normalizePath(
-            resolve(__dirname, "./dist/assets/compiled/fonts")
-          ),
+          src: normalizePath(resolve(__dirname, "./dist/assets/compiled/fonts")),
           dest: "assets/compiled/css",
         },
         {
-          src: normalizePath(
-            resolve(
-              __dirname,
-              "./node_modules/bootstrap-icons/bootstrap-icons.svg"
-            )
-          ),
+          src: normalizePath(resolve(__dirname, "./node_modules/bootstrap-icons/bootstrap-icons.svg")),
           dest: "assets/static/images",
         },
         ...copyModules,
@@ -75,7 +63,7 @@ export default defineConfig((env) => ({
   ],
   resolve: {
     alias: {
-      "@src": resolve(__dirname, "src"),
+      "@": resolve(__dirname, "src"),
       "@style": resolve(__dirname, "style"),
       "~bootstrap": resolve(__dirname, "node_modules/bootstrap"),
       "~bootstrap-icons": resolve(__dirname, "node_modules/bootstrap-icons"),
