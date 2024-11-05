@@ -33,18 +33,12 @@ export const routes = [
 
   {
     path: "/text",
+    redirect: "/text/caseChange",
     meta: {
       i18n: "text",
     },
     component: EmptyBody,
     children: [
-      {
-        path: "", // 기본 경로는 /user
-        component: CaseChange,
-        meta: {
-          i18n: "case.change",
-        },
-      },
       {
         component: CaseChange,
         path: "caseChange",
