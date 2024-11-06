@@ -11,9 +11,7 @@ export default {
   },
   methods: {
     async fetchRecipes() {
-      await fetch(
-        "https://www.themealdb.com/api/json/v1/1/search.php?s=" + this.recipe
-      )
+      await fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=" + this.recipe)
         .then((response) => response.json())
         .then((result) => {
           this.recipeName = result.meals[0].strMeal;
@@ -27,7 +25,7 @@ export default {
 </script>
 
 <template>
-  <h1>Search By Name</h1>
+  <h1>{{ $t("index.title") }}</h1>
   <h2>Write the name of the dish</h2>
   <input type="text" v-model="recipe" />
   <button type="button" @click="fetchRecipes()">Get</button>

@@ -1,0 +1,14 @@
+{
+  "index": {
+    "title": "英文"
+  },
+  "menu": {
+    "text_diff": "文字比较",
+    "qr_qenerator": "QR生成器",
+    "image_base64": "图像Base64",
+    "text": "文本",
+    "case_change": "大小写转换",
+    "text_size": "大小检查",
+    "text_sort": "文字排序"
+  }
+}

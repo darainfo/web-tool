@@ -1,0 +1,14 @@
+{
+  "index": {
+    "title": "In English"
+  },
+  "menu": {
+    "text_diff": "Text Comparison",
+    "qr_qenerator": "QR Generator",
+    "image_base64": "Image Base64",
+    "text": "Text",
+    "case_change": "Case Conversion",
+    "text_size": "Size Check",
+    "text_sort": "Text Sorting"
+  }
+}

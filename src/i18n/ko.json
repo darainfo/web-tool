@@ -1,0 +1,14 @@
+{
+  "index": {
+    "title": "영어임."
+  },
+  "menu": {
+    "text_diff": "글자 비교",
+    "qr_qenerator": "QR 생성",
+    "image_base64": "이미지 Base64",
+    "text": "텍스트",
+    "case_change": "Case 변환",
+    "text_size": "Size 체크",
+    "text_sort": "글자 정렬"
+  }
+}

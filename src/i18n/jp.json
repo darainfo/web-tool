@@ -1,0 +1,14 @@
+{
+  "index": {
+    "title": "英語"
+  },
+  "menu": {
+    "text_diff": "テキスト比較",
+    "qr_qenerator": "QRジェネレーター",
+    "image_base64": "画像Base64",
+    "text": "テキスト",
+    "case_change": "ケース変換",
+    "text_size": "サイズチェック",
+    "text_sort": "テキストソート"
+  }
+}

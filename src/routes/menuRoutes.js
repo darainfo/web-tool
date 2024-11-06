@@ -13,21 +13,21 @@ export const routes = [
     component: TextDiff,
     path: "/textDiff",
     meta: {
-      i18n: "text.diff",
+      i18n: "menu.text_diff",
     },
   },
   {
     component: QrGenerator,
     path: "/qrGenerator",
     meta: {
-      i18n: "qr.qenerator",
+      i18n: "menu.qr_qenerator",
     },
   },
   {
     component: ImageBase64,
     path: "/imageToDataUrl",
     meta: {
-      i18n: "image.base64",
+      i18n: "menu.image_base64",
     },
   },
 
@@ -35,7 +35,7 @@ export const routes = [
     path: "/text",
     redirect: "/text/caseChange",
     meta: {
-      i18n: "text",
+      i18n: "menu.text",
     },
     component: EmptyBody,
     children: [
@@ -43,21 +43,21 @@ export const routes = [
         component: CaseChange,
         path: "caseChange",
         meta: {
-          i18n: "case.change",
+          i18n: "menu.case_change",
         },
       },
       {
         component: TextSize,
         path: "textSize",
         meta: {
-          i18n: "text.size",
+          i18n: "menu.text_size",
         },
       },
       {
         component: TextSort,
         path: "textSort",
         meta: {
-          i18n: "text.sort",
+          i18n: "menu.text_sort",
         },
       },
     ],

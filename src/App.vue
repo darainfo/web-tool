@@ -1,6 +1,6 @@
 <script>
-import SideBar from "./components/layout/SideBar.vue";
-import TopBar from "./components/layout/TopBar.vue";
+import SideBar from "./components/menu/SideBar.vue";
+import TopBar from "./components/menu/TopBar.vue";
 
 export default {
   components: {

@@ -28,11 +28,21 @@
           </div>
         </div>
       </li>
+      <li>
+        <button class="btn btn-primary" :class="{ show: enableLanguage }" @click="this.enableLanguage = !this.enableLanguage" type="button" data-bs-toggle="dropdown" aria-expanded="false">Language</button>
+        <ul class="dropdown-menu" :class="{ show: enableLanguage }">
+          <li v-for="(item, key) in language" :key="key">
+            <a class="dropdown-item" @click="selectLanguage(item)">{{ item.title }}</a>
+          </li>
+        </ul>
+      </li>
     </ul>
   </div>
 </template>
 <script>
 import { isDesktop } from "@/utils/utils";
+import { LayoutLanguages } from "@/i18n/config/locales";
+import { i18n, changeLanguage } from "@/i18n";
 
 const THEME_KEY = "theme";
 export default {
@@ -40,6 +50,8 @@ export default {
     return {
       isMenuOpen: false,
       isThemeChecked: false,
+      language: LayoutLanguages,
+      enableLanguage: false,
     };
   },
   props: {
@@ -69,6 +81,11 @@ export default {
     return this.setTheme(mediaQuery.matches ? "dark" : "light");
   },
   methods: {
+    selectLanguage(lang) {
+      i18n.global.locale = lang.param;
+      changeLanguage(lang.param);
+      this.enableLanguage = false;
+    },
     // 메뉴 토글
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen;
