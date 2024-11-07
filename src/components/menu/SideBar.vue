@@ -23,6 +23,8 @@ import { i18n } from "@/i18n";
 const allMenuItem = {};
 function deepCopyWithSlice(arr, parentItem, returnArr) {
   for (const item of arr) {
+    if (item.meta.hideMenu === true) continue;
+
     const isChild = item.children && item.children.length > 0 ? true : false;
 
     const reItem = reactive({ isChild: isChild, isOpen: false, isActive: false, parentNode: parentItem });

@@ -37,6 +37,8 @@ const copyModules = Object.keys(modulesToCopy).map((moduleName) => {
 });
 
 export default defineConfig((env) => ({
+  base: "",
+  transpileDependencies: true,
   plugins: [
     vue(),
     commonjs(),
