@@ -1,8 +1,8 @@
-import QrGenerator from "../views/qr-generator.vue";
-import ImageBase64 from "../views/image-base64.vue";
-import TextDiff from "../views/text-diff.vue";
+// import QrGenerator from "../views/qr-generator.vue";
+// import ImageBase64 from "../views/image-base64.vue";
+// import TextDiff from "../views/text-diff.vue";
 
-import NotFound from "../components/not-found.vue";
+import NotFound from "../components/common/not-found.vue";
 import EmptyBody from "../components/layout/EmptyBody.vue";
 
 //import CaseChange from "../views/text/case-change.vue";
