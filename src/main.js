@@ -12,3 +12,5 @@ app
   .use(appRouter(app))
   //.use(store)
   .mount("#appContainer");
+
+import "bootstrap/dist/js/bootstrap.bundle.min.js";

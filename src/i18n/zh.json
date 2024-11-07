@@ -10,5 +10,6 @@
     "case_change": "大小写转换",
     "text_size": "大小检查",
     "text_sort": "文字排序"
-  }
+  },
+  "not.found": "No Data"
 }

@@ -1,14 +1,15 @@
 <!-- RecursiveList.vue -->
 <template>
   <ul class="menu">
-    {{
-      searchList.length
-    }}
-    <template v-if="searchList.length > 0">
-      <li v-for="(item, key) in items" :key="key" class="sidebar-item" :class="{ active: item.isActive }">
+    <template v-if="enableSearch">
+      <li v-for="(item, key) in searchList" :key="key" class="sidebar-item" :class="{ active: item.isActive }">
         <RouterLink :to="item.path" class="sidebar-link" active-class="active" exact-active-class="">
           <span>{{ $t(item.meta.i18n) }}</span>
         </RouterLink>
+      </li>
+
+      <li class="sidebar-item" v-if="searchList.length < 1">
+        <div class="text-center">{{ $t("not.found") }}</div>
       </li>
     </template>
     <template v-else>
@@ -39,6 +40,10 @@ export default {
     },
     searchList: {
       type: Array,
+      required: true,
+    },
+    enableSearch: {
+      type: Boolean,
       required: true,
     },
     depth: {

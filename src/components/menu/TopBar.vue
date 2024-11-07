@@ -29,10 +29,10 @@
         </div>
       </li>
       <li>
-        <button class="btn btn-primary" :class="{ show: enableLanguage }" @click="this.enableLanguage = !this.enableLanguage" type="button" data-bs-toggle="dropdown" aria-expanded="false">Language</button>
-        <ul class="dropdown-menu" :class="{ show: enableLanguage }">
+        <button class="btn btn-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">Language</button>
+        <ul class="dropdown-menu">
           <li v-for="(item, key) in language" :key="key">
-            <a class="dropdown-item" @click="selectLanguage(item)">{{ item.title }}</a>
+            <a href="javascript:;" class="dropdown-item" @click="selectLanguage(item)">{{ item.title }}</a>
           </li>
         </ul>
       </li>
@@ -40,7 +40,7 @@
   </div>
 </template>
 <script>
-import { isDesktop } from "@/utils/utils";
+import { isMobile, isMinimumSize } from "@/utils/utils";
 import { LayoutLanguages } from "@/i18n/config/locales";
 import { i18n, changeLanguage } from "@/i18n";
 
@@ -80,7 +80,27 @@ export default {
     mediaQuery.addEventListener("change", (e) => this.setTheme(e.matches ? "dark" : "light"));
     return this.setTheme(mediaQuery.matches ? "dark" : "light");
   },
+
+  mounted() {
+    this.initSidemenubar();
+  },
   methods: {
+    initSidemenubar() {
+      // header menu 처
+      const sidebarContainer = document.getElementById("sidebarContainer");
+      const appContainerEl = document.getElementById("appContainer");
+
+      const sidebarElement = document.querySelector(".sidebar-toggle");
+
+      const classList = appContainerEl.classList;
+
+      document.addEventListener("click", (event) => {
+        if (!isMinimumSize(window) && !sidebarContainer.contains(event.target) && !sidebarElement.contains(event.target)) {
+          classList.toggle("menu-inactive");
+          classList.remove("menu-active");
+        }
+      });
+    },
     selectLanguage(lang) {
       i18n.global.locale = lang.param;
       changeLanguage(lang.param);
@@ -94,7 +114,7 @@ export default {
 
       const classList = appContainerEl.classList;
 
-      if (isDesktop(window)) {
+      if (isMinimumSize(window)) {
         classList.toggle("menu-inactive");
         classList.remove("menu-active");
       } else {

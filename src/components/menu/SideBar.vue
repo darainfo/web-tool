@@ -2,11 +2,11 @@
   <div class="sidebar-wrapper">
     <div class="sidebar-menu-wrapper">
       <div class="sidebar-search">
-        <input type="text" @input="menuSearch()" v-model="searchText" class="form-control" placeholder="Menu search." />
+        <input type="text" @input="menuSearch($event)" class="form-control" placeholder="Menu search." />
       </div>
       <div class="sidebar-menu">
         <div class="wrapper">
-          <SideMenu :items="items" :searchList="searchList" :depth="0" />
+          <SideMenu :items="items" :searchList="searchList" :enableSearch="enableSearch" :depth="0" />
         </div>
       </div>
     </div>
@@ -16,7 +16,7 @@
 <script>
 import { routes } from "@/routes/menuRoutes";
 import SideMenu from "./SideMenu.vue";
-import { watch, reactive } from "vue";
+import { watch, reactive, ref } from "vue";
 import { useRoute } from "vue-router";
 import { i18n } from "@/i18n";
 
@@ -70,11 +70,33 @@ export default {
       }
     });
 
+    const searchList = reactive([]);
+    let enableSearch = ref(false);
+
+    const menuSearch = (event) => {
+      const searchText = event.target.value;
+
+      if (searchText.length > 0) {
+        enableSearch.value = true;
+        const regExpSch = new RegExp(searchText.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1"), "i");
+        searchList.length = 0;
+        for (const [key, item] of Object.entries(allMenuItem)) {
+          if (!item.isChild && i18n.global.t(item.meta.i18n).match(regExpSch) != null) {
+            searchList.push(item);
+          }
+        }
+      } else {
+        enableSearch.value = false;
+        searchList.length = 0;
+      }
+    };
+
     return {
       items: menuList,
       orginList: menuList,
-      searchList: reactive([]),
-      searchText: "",
+      searchList: searchList,
+      enableSearch,
+      menuSearch,
     };
   },
   props: {
@@ -85,24 +107,6 @@ export default {
     source: {
       type: String,
       default: "",
-    },
-  },
-
-  methods: {
-    menuSearch() {
-      const keyword = this.searchText;
-
-      if (keyword.length > 0) {
-        const regExpSch = new RegExp(keyword.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1"), "i");
-        this.searchList.length = 0;
-        for (const [key, item] of Object.entries(allMenuItem)) {
-          if (!item.isChild && i18n.global.t(item.meta.i18n).match(regExpSch) != null) {
-            this.searchList.push(item);
-          }
-        }
-
-        console.log("this.searchList : ", this.searchList.length);
-      }
     },
   },
 };

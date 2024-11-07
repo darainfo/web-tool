@@ -10,5 +10,6 @@
     "case_change": "ケース変換",
     "text_size": "サイズチェック",
     "text_sort": "テキストソート"
-  }
+  },
+  "not.found": "No Data"
 }

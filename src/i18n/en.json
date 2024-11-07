@@ -10,5 +10,6 @@
     "case_change": "Case Conversion",
     "text_size": "Size Check",
     "text_sort": "Text Sorting"
-  }
+  },
+  "not.found": "No Data"
 }

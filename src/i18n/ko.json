@@ -10,5 +10,6 @@
     "case_change": "Case 변환",
     "text_size": "Size 체크",
     "text_sort": "글자 정렬"
-  }
+  },
+  "not.found": "데이터가 없습니다"
 }

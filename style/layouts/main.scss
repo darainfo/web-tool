@@ -18,7 +18,7 @@
     top: 0px;
   }
 
-  @media screen and (max-width: 1199px) {
+  @media screen and (max-width: 1024px) {
     margin-left: 0;
   }
 
@@ -95,7 +95,7 @@
     position: absolute;
     width: auto;
     right: 0px;
-    margin-top: 8px !important;
+    margin-top: 2px !important;
     min-width: 12rem;
   }
 }
@@ -241,5 +241,12 @@ a {
     > #mainContainer {
       margin-left: 0px;
     }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  #sidebarContainer {
+    position: fixed;
+    left: -300px;
   }
 }
