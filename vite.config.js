@@ -7,12 +7,20 @@ import { viteStaticCopy } from "vite-plugin-static-copy";
 import commonjs from "@rollup/plugin-commonjs";
 import vue from "@vitejs/plugin-vue";
 
+import prerenderSpaPlugin from "prerender-spa-plugin";
+
 import monacoEditorPlugin from "vite-plugin-monaco-editor";
+
+//import { getPagePath } from "./src/routes/menuRoutes";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const root = resolve(__dirname, "src");
+
+const routesToPrerender = ["/", "/textDiff", "/qrGenerator", "/imageToDataUrl"];
+
+//const routesToPrerender = getPagePath();
 
 const modulesToCopy = {
   "rater-js": false,
@@ -52,6 +60,11 @@ export default defineConfig((env) => ({
   plugins: [
     vue(),
     monacoEditorPlugin({}),
+    prerenderSpaPlugin({
+      staticDir: resolve(__dirname, "dist"), // Directory where your app is built
+      routes: routesToPrerender,
+      // Optional: other configuration options go here
+    }),
     commonjs(),
     viteStaticCopy({
       targets: [

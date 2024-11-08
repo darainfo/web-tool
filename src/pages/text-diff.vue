@@ -11,7 +11,7 @@
     <section class="section">
       <div class="card">
         <div class="card-body">
-          <div class="btn-example">
+          <div class="btn-example" style="position: relative">
             <template v-if="!isViewer">
               <button type="button" @click="diffMove('previous')" class="btn btn-light-secondary btn-sm">{{ $t("prev") }}</button>
               <button type="button" @click="diffMove('next')" class="btn btn-light-secondary btn-sm">{{ $t("next") }}</button>
@@ -22,7 +22,15 @@
               <button type="button" @click="viewerMove('next')" class="btn btn-default">{{ $t("next") }}</button>
               <button type="button" @click="viewerToggle(false)" class="btn btn-default">{{ $t("close") }}</button>
             </template>
+
+            <div style="position: absolute; right: 0px; top: 0px">
+              {{ $t("language.select") }}
+              <select v-model="selectLanguage" style="width: 150px; display: inline-block" class="form-control" @change="changeEditorLang()">
+                <option v-for="(item, key) in supportedLanguages" :value="item" :key="key">{{ item }}</option>
+              </select>
+            </div>
           </div>
+
           <div class="row" style="height: calc(100vh - 270px); min-height: 380px">
             <div id="diffEditor"></div>
           </div>
@@ -54,6 +62,67 @@ export default {
     return {
       options: {},
       isViewer: false,
+      selectLanguage: "javascript",
+      supportedLanguages: [
+        "abap", // abap
+        "actionscript", // actionscript
+        "ada", // ada
+        "apex", // apex
+        "azcli", // azure cli
+        "bat", // batch
+        "bicep", // bicep
+        "c", // c
+        "csharp", // c#
+        "csp", // content-security-policy
+        "css", // css
+        "dockerfile", // dockerfile
+        "fsharp", // f#
+        "go", // go
+        "graphql", // graphql
+        "groovy", // groovy
+        "haml", // haml
+        "handlebars", // handlebars
+        "haskell", // haskell
+        "html", // html
+        "java", // java
+        "javascript", // javascript
+        "json", // json
+        "json5", // json5
+        "julia", // julia
+        "kotlin", // kotlin
+        "latex", // latex
+        "less", // less
+        "lua", // lua
+        "makefile", // makefile
+        "markdown", // markdown
+        "mermaid", // mermaid
+        "mips", // mips assembly
+        "objective-c", // objective-c
+        "pascal", // pascal
+        "perl", // perl
+        "php", // php
+        "plaintext", // plain text
+        "postcss", // postcss
+        "powershell", // powershell
+        "prolog", // prolog
+        "protobuf", // protocol buffers
+        "python", // python
+        "r", // r
+        "ruby", // ruby
+        "rust", // rust
+        "scala", // scala
+        "scss", // scss
+        "shell", // shell scripting (bash)
+        "sql", // sql
+        "swift", // swift
+        "typescript", // typescript
+        "typescriptreact", // typescript react (jsx)
+        "vbscript", // vbscript
+        "xml", // xml
+        "xquery", // xquery
+        "yaml", // yaml
+        "yaml", // yaml
+      ],
     };
   },
   mounted() {
@@ -63,13 +132,21 @@ export default {
       renderSideBySide: true,
       automaticLayout: true,
       originalEditable: true,
+      language: this.selectLanguage,
       scrollbar: {
         // alwaysConsumeMouseWheel: false,
       },
     });
-    this.diff("", "", "");
+    this.diff("", "", this.selectLanguage);
+    this.lineViewer();
   },
   methods: {
+    changeEditorLang() {
+      this.diff(diffEditor.getOriginalEditor().getValue(), diffEditor.getModifiedEditor().getValue(), this.selectLanguage);
+      //diffEditor.setModel(monaco.editor.createModel(diffEditor.getValue(), this.selectLanguage));
+
+      //diffEditor.updateOptions({ language: this.selectLanguage });
+    },
     diff(source, target, language) {
       language = language || "sql";
       const leftModel = monaco.editor.createModel(source, language);
@@ -79,7 +156,6 @@ export default {
         original: leftModel,
         modified: rightModel,
       });
-      this.lineViewer();
     },
     lineViewer() {
       diffEditor.getOriginalEditor().onMouseUp((event) => {
@@ -158,9 +234,6 @@ export default {
         diffEditor.updateOptions({ onlyShowAccessibleDiffViewer: false });
         diffEditor._accessibleDiffViewer.value._setVisible(false);
       }
-    },
-    updateEditorOptions(opts) {
-      diffEditor.updateOptions(opts);
     },
   },
 };

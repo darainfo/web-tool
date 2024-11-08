@@ -15,5 +15,6 @@
   "prev": "前へ",
   "next": "次へ",
   "close": "閉じる",
-  "viewer.view": "ビューアで見る"
+  "viewer.view": "ビューアで見る",
+  "language.select": "Language"
 }

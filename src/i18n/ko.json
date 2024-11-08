@@ -3,7 +3,7 @@
     "title": "영어임."
   },
   "menu": {
-    "text_diff": "글자 비교",
+    "text_diff": "텍스트 비교",
     "qr_qenerator": "QR 생성",
     "image_base64": "이미지 Base64",
     "text": "텍스트",
@@ -15,5 +15,6 @@
   "prev": "이전",
   "next": "다음",
   "close": "닫기",
-  "viewer.view": "뷰어보기"
+  "viewer.view": "뷰어보기",
+  "language.select": "언어선택"
 }
