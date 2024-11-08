@@ -7,6 +7,8 @@ import { viteStaticCopy } from "vite-plugin-static-copy";
 import commonjs from "@rollup/plugin-commonjs";
 import vue from "@vitejs/plugin-vue";
 
+import monacoEditorPlugin from "vite-plugin-monaco-editor";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -15,14 +17,9 @@ const root = resolve(__dirname, "src");
 const modulesToCopy = {
   "rater-js": false,
   "bootstrap-icons": false,
-  apexcharts: true,
+  bootstrap: true,
   "@daracl/datatimepicker": true,
   "@daracl/toast": true,
-  "dara-form": true,
-  dragula: true,
-  "choices.js": false,
-  summernote: true,
-  quill: true,
   tinymce: false,
   jsvectormap: true,
 };
@@ -38,9 +35,23 @@ const copyModules = Object.keys(modulesToCopy).map((moduleName) => {
 
 export default defineConfig((env) => ({
   base: "",
-  transpileDependencies: true,
+  //transpileDependencies: true,
+  esbuild: {
+    // CommonJS 모듈을 ES 모듈로 변환하여 처리
+    loader: "jsx",
+    include: /\.js$/,
+  },
+  optimizeDeps: {
+    include: ["bootstrap"],
+  },
+  build: {
+    commonjsOptions: {
+      include: [/bootstrap/, /node_modules/],
+    },
+  },
   plugins: [
     vue(),
+    monacoEditorPlugin({}),
     commonjs(),
     viteStaticCopy({
       targets: [

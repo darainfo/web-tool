@@ -133,7 +133,11 @@ export function toSnackCase(str) {
 
 export function getStringSize(str) {
   // 문자열이 비어 있을 경우 0 반환
-  if (!str) return 0;
+  if (!str)
+    return {
+      byte: 0,
+      length: 0,
+    };
 
   // 각 문자의 UTF-8 바이트 크기를 계산하여 합산
   let byteSize = 0;
@@ -160,4 +164,14 @@ export function getStringSize(str) {
     byte: byteSize,
     length: str.length,
   };
+}
+
+export function isImageFile(fileName) {
+  const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.bmp|\.webp|\.svg)$/i;
+  return allowedExtensions.test(fileName);
+}
+
+export function isFileSizeValid(file, maxSizeInMB) {
+  const maxSizeInBytes = maxSizeInMB * 1024 * 1024; // MB to Bytes
+  return file.size <= maxSizeInBytes;
 }

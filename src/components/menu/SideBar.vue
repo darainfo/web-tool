@@ -46,11 +46,14 @@ function deepCopyWithSlice(arr, parentItem, returnArr) {
 }
 
 // 활성화된 메뉴 부모 상태 처리
-function setParentEnableActive(menuItem, flag) {
+function setParentEnableActive(menuItem, flag, isOpen) {
+  if (isOpen && flag) {
+    menuItem.isOpen = true;
+  }
   menuItem.isActive = flag;
 
   if (menuItem.parentNode) {
-    setParentEnableActive(menuItem.parentNode, flag);
+    setParentEnableActive(menuItem.parentNode, flag, true);
   }
 }
 
@@ -66,8 +69,8 @@ export default {
 
     watch(currentPagePath, (newRoute, oldRoute) => {
       if (allMenuItem[newRoute.path]) {
-        setParentEnableActive(beforeActiveItem, false);
-        setParentEnableActive(allMenuItem[newRoute.path], true);
+        setParentEnableActive(beforeActiveItem, false, false);
+        setParentEnableActive(allMenuItem[newRoute.path], true, false);
         beforeActiveItem = allMenuItem[newRoute.path];
       }
     });

@@ -11,5 +11,9 @@
     "text_size": "大小检查",
     "text_sort": "文字排序"
   },
-  "not.found": "No Data"
+  "not.found": "No Data",
+  "prev": "上一页",
+  "next": "下一页",
+  "close": "关闭",
+  "viewer.view": "查看器中查看"
 }

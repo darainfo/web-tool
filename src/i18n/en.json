@@ -11,5 +11,9 @@
     "text_size": "Size Check",
     "text_sort": "Text Sorting"
   },
-  "not.found": "No Data"
+  "not.found": "No Data",
+  "prev": "Previous",
+  "next": "Next",
+  "close": "Close",
+  "viewer.view": "View in Viewer"
 }

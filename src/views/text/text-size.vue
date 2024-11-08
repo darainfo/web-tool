@@ -1,59 +1,58 @@
+<template>
+  <div class="page-heading">
+    <div class="page-title">
+      <div class="row">
+        <div class="col-12 col-md-6 order-md-1 order-last">
+          <h3>Text Size</h3>
+        </div>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="card">
+        <div class="card-body">
+          <form id="mainForm">
+            <div class="row">
+              <div class="col-sm mb-3">
+                <textarea class="form-control" rows="19" v-model="orginText" @input="sizeCheck()" placeholder="Enter the characters to check size"></textarea>
+
+                <div class="mb-3 col-sm-12">
+                  <div class="text-center">
+                    <div class="mb-1 mt-2">
+                      <span id="textSize" class="h5">{{ resultText }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+</template>
+
 <script>
+import { getStringSize } from "@/utils/common";
+
 export default {
   data() {
     return {
-      recipeName: "Here you will see the name of the recipe",
-      instructions: "And here you can read about how to do it",
-      imgSource: null,
-      link: null,
-      ingredients: null,
+      orginText: "",
+      resultText: "",
     };
   },
+  mounted() {
+    this.sizeCheck();
+  },
   methods: {
-    async fetchRecipe() {
-      await fetch("https://www.themealdb.com/api/json/v1/1/random.php")
-        .then((response) => response.json())
-        .then((result) => {
-          this.recipeName = result.meals[0].strMeal;
-          this.instructions = result.meals[0].strInstructions;
-          this.imgSource = result.meals[0].strMealThumb;
-          this.link = result.meals[0].strYoutube;
-          this.ingredients = [];
-          for (const [key, value] of Object.entries(result.meals[0])) {
-            if (key.startsWith("strIngredient")) {
-              this.ingredients.push(value);
-            }
-          }
-        });
+    sizeCheck() {
+      const orginText = this.orginText || "";
+
+      const size = getStringSize(orginText);
+
+      this.resultText = `Char length : ${size.length}, byte : ${size.byte}`;
     },
   },
 };
 </script>
-
-<style>
-.imageandingredients {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-}
-</style>
-
-<template>
-  <h1>22222222222222222Get a random recipe</h1>
-  <button type="button" @click="fetchRecipe()">Random Recipe</button>
-  <h2>{{ recipeName }}</h2>
-  <div class="imageandingredients">
-    <img :src="imgSource" alt="" v-if="imgSource" />
-    <p v-else>Here you will see a picture</p>
-    <div>
-      <h3 v-if="ingredients">Ingredients</h3>
-      <ul>
-        <template v-for="ingredient of ingredients" :key="ingredient.index">
-          <li v-if="ingredient">{{ ingredient }}</li>
-        </template>
-      </ul>
-    </div>
-  </div>
-  <p>{{ instructions }}</p>
-  <a v-if="link" :href="link">Watch a Youtube-video</a>
-</template>

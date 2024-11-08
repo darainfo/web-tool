@@ -38,7 +38,7 @@
                   <canvas id="qrImageViewer"></canvas>
                 </div>
                 <div class="float-end">
-                  <button onclick="qrImgDownload()" type="button" class="btn btn btn-primary">download</button>
+                  <button @click="qrImgDownload()" type="button" class="btn btn btn-primary">download</button>
                 </div>
               </div>
             </div>
@@ -50,11 +50,14 @@
 </template>
 
 <script>
+import { loadScript } from "@/utils/utils";
+
 export default {
   created() {},
   data() {
     return {
       qrTextSize: 0,
+      scriptLoaded: false,
     };
   },
   methods: {
@@ -62,6 +65,21 @@ export default {
       this.qrTextSize = event.target.value.length;
     },
     convert() {
+      if (!this.scriptLoaded) {
+        loadScript("/assets/static/js/plugins/qrcode.min.js")
+          .then(() => {
+            this.scriptLoaded = true;
+            this.createQRCode(); // 스크립트가 로드된 후 QR 코드 생성
+          })
+          .catch((error) => {
+            console.error("스크립트 로드 실패:", error);
+          });
+      } else {
+        // 이미 스크립트가 로드된 경우 바로 QR 코드 생성
+        this.createQRCode();
+      }
+    },
+    createQRCode() {
       let qrText = document.getElementById("qrText").value;
 
       let qrOptions = { errorCorrectionLevel: "M" };
@@ -79,6 +97,13 @@ export default {
           console.log("QR code generated!");
         }
       });
+    },
+    qrImgDownload() {
+      const canvas = document.getElementById("qrImageViewer");
+      const link = document.createElement("a");
+      link.href = canvas.toDataURL("image/png"); // PNG 형식으로 데이터 URL 생성
+      link.download = "canvas-image.png"; // 다운로드할 파일 이름
+      link.click(); // 링크 클릭하여 다운로드
     },
   },
 };

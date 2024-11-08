@@ -1,59 +1,114 @@
+<template>
+  <div class="page-heading">
+    <div class="page-title">
+      <div class="row">
+        <div class="col-12 col-md-6 order-md-1 order-last">
+          <h3>Image Base64</h3>
+          <p class="text-subtitle text-muted">Image Base64 converter</p>
+        </div>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="card">
+        <div class="card-body">
+          <form id="mainForm">
+            <h2>gif, jpg, jpeg, png, bmp, webp, svg</h2>
+
+            <div class="mb-1">
+              <label for="formFile" class="form-label">Image select</label>
+              <input class="form-control" type="file" id="formFile" @change="selectImage()" accept=".gif,.jpg,.jpeg,.png,.bmp,.webp,.svg" />
+            </div>
+
+            <div class="col-sm-12 d-flex justify-content-end">
+              <button type="button" class="btn btn-light-secondary" @click="formReset()">Reset</button>
+            </div>
+
+            <div class="mb-1">
+              Data URI -- data:content/type;base64
+              <input id="imageBase64" class="form-control" readonly />
+            </div>
+
+            <div class="col-sm-12 d-flex justify-content-end">
+              <TextCopyButton copyField="#imageBase64" />
+            </div>
+
+            <div style="width: 100%; height: 500px; overflow: auto">
+              <img id="dataUriImageView" src="" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+</template>
+
 <script>
+import TextCopyButton from "@/components/button/TextCopyButton.vue";
+import { isImageFile, isFileSizeValid } from "@/utils/common";
+
 export default {
+  name: "imageBase64",
+  components: {
+    TextCopyButton,
+  },
   data() {
-    return {
-      recipeName: "Here you will see the name of the recipe",
-      instructions: "And here you can read about how to do it",
-      imgSource: null,
-      link: null,
-      ingredients: null,
-    };
+    return {};
   },
   methods: {
-    async fetchRecipe() {
-      await fetch("https://www.themealdb.com/api/json/v1/1/random.php")
-        .then((response) => response.json())
-        .then((result) => {
-          this.recipeName = result.meals[0].strMeal;
-          this.instructions = result.meals[0].strInstructions;
-          this.imgSource = result.meals[0].strMealThumb;
-          this.link = result.meals[0].strYoutube;
-          this.ingredients = [];
-          for (const [key, value] of Object.entries(result.meals[0])) {
-            if (key.startsWith("strIngredient")) {
-              this.ingredients.push(value);
+    formReset() {
+      document.getElementById("mainForm").reset();
+      document.getElementById("dataUriImageView").src = "";
+    },
+    selectImage() {
+      let file = document.querySelector("input[type=file]")["files"][0];
+
+      if (file) {
+        const isImage = isImageFile(file.name);
+        const isValidSize = isFileSizeValid(file, 5); // 5MB 체크
+
+        if (isImage && isValidSize) {
+          this.convertBase64(file);
+        } else {
+          if (!isImage) {
+            console.log("File is not Image");
+          }
+          if (!isValidSize) {
+            if (confirm("The file size exceeds 5MB. Do you want to convert it?")) {
+              this.convertBase64(file);
             }
           }
-        });
+        }
+      }
+    },
+    convertBase64(file) {
+      let reader = new FileReader();
+
+      reader.onload = function (e) {
+        let base64String;
+        let dataUriValue;
+        if (file && file.type === "image/svg+xml") {
+          const svgContent = e.target.result;
+          if (svgContent.startsWith("data:image/")) {
+            dataUriValue = svgContent;
+          } else {
+            base64String = btoa(svgContent);
+            dataUriValue = "data:image/svg+xml;base64," + base64String;
+          }
+        } else {
+          let imgContent = reader.result;
+          if (imgContent.startsWith("data:image/")) {
+            dataUriValue = imgContent;
+          } else {
+            base64String = imgContent.replace("data:", "").replace(/^.+,/, "");
+            dataUriValue = "data:" + file.type + ";base64," + base64String;
+          }
+        }
+        document.getElementById("imageBase64").value = dataUriValue;
+        document.getElementById("dataUriImageView").src = dataUriValue;
+      };
+      reader.readAsDataURL(file);
     },
   },
 };
 </script>
-
-<style>
-.imageandingredients {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-}
-</style>
-
-<template>
-  <h1>Get a random recipe</h1>
-  <button type="button" @click="fetchRecipe()">Random Recipe</button>
-  <h2>{{ recipeName }}</h2>
-  <div class="imageandingredients">
-    <img :src="imgSource" alt="" v-if="imgSource" />
-    <p v-else>Here you will see a picture</p>
-    <div>
-      <h3 v-if="ingredients">Ingredients</h3>
-      <ul>
-        <template v-for="ingredient of ingredients" :key="ingredient.index">
-          <li v-if="ingredient">{{ ingredient }}</li>
-        </template>
-      </ul>
-    </div>
-  </div>
-  <p>{{ instructions }}</p>
-  <a v-if="link" :href="link">Watch a Youtube-video</a>
-</template>
