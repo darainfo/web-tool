@@ -7,9 +7,9 @@
         </a>
       </div>
       <div class="logo">
-        <a href="index.html">
+        <RouterLink to="/">
           {{ logoTitle }}
-        </a>
+        </RouterLink>
       </div>
     </div>
   </div>

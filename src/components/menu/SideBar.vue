@@ -14,36 +14,11 @@
 </template>
 
 <script>
-import { routes } from "@/routes/menuRoutes";
+import { getAllMenuItem, G_ALL_MENU_ITEM } from "@/routes/menuRoutes";
 import SideMenu from "./SideMenu.vue";
 import { watch, reactive, ref } from "vue";
 import { useRoute } from "vue-router";
 import { i18n } from "@/i18n";
-
-const allMenuItem = {};
-function deepCopyWithSlice(arr, parentItem, returnArr) {
-  for (const item of arr) {
-    if (item.meta.hideMenu === true) continue;
-
-    const isChild = item.children && item.children.length > 0 ? true : false;
-
-    const reItem = reactive({ isChild: isChild, isOpen: false, isActive: false, parentNode: parentItem });
-
-    reItem["path"] = (parentItem.path ? parentItem.path + "/" : "") + item.path;
-    reItem["key"] = reItem["path"];
-    for (const key of ["meta", "name"]) {
-      if (item[key]) reItem[key] = item[key];
-    }
-
-    if (isChild) {
-      reItem["children"] = deepCopyWithSlice(item.children, reItem, []);
-    }
-    returnArr.push(reItem);
-
-    allMenuItem[reItem["path"]] = reItem;
-  }
-  return returnArr;
-}
 
 // 활성화된 메뉴 부모 상태 처리
 function setParentEnableActive(menuItem, flag, isOpen) {
@@ -64,14 +39,16 @@ export default {
   setup() {
     const currentPagePath = useRoute();
     let beforeActiveItem = {};
-    const menuList = []; //reactive([]);
-    deepCopyWithSlice(routes, { path: "" }, menuList);
+    const menuList = getAllMenuItem();
 
     watch(currentPagePath, (newRoute, oldRoute) => {
-      if (allMenuItem[newRoute.path]) {
+      let newPath = newRoute.path;
+      newPath = newPath.endsWith("/") ? newPath.replace(/\/$/, "") : newPath;
+
+      if (G_ALL_MENU_ITEM[newPath]) {
         setParentEnableActive(beforeActiveItem, false, false);
-        setParentEnableActive(allMenuItem[newRoute.path], true, false);
-        beforeActiveItem = allMenuItem[newRoute.path];
+        setParentEnableActive(G_ALL_MENU_ITEM[newPath], true, false);
+        beforeActiveItem = G_ALL_MENU_ITEM[newPath];
       }
     });
 
@@ -85,7 +62,7 @@ export default {
         enableSearch.value = true;
         const regExpSch = new RegExp(searchText.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1"), "i");
         searchList.length = 0;
-        for (const [key, item] of Object.entries(allMenuItem)) {
+        for (const [key, item] of Object.entries(G_ALL_MENU_ITEM)) {
           if (!item.isChild && i18n.global.t(item.meta.i18n).match(regExpSch) != null) {
             searchList.push(item);
           }
@@ -98,7 +75,6 @@ export default {
 
     return {
       items: menuList,
-      orginList: menuList,
       searchList: searchList,
       enableSearch,
       menuSearch,

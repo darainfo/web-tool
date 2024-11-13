@@ -3,7 +3,7 @@
     <div class="page-title">
       <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
-          <h3>Text Sort</h3>
+          <h3>{{ $t("menu.text_sort") }}</h3>
         </div>
       </div>
     </div>
@@ -15,13 +15,53 @@
             <div class="row">
               <div class="col-sm mb-3">
                 <div class="mb-3">
-                  <div class="btn-example">
-                    <button type="button" class="btn btn-light-secondary btn-sm" @click="textSort('vertical', 'asc')">Vertical asc</button>
+                  <div class="col-12 mb-2" style="border: 1px solid #e2e2e2; border-radius: 3px; padding: 5px 0px">
+                    <div>
+                      Delimiter
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" v-model="directFlag" />
+                        <label class="form-check-label" for="delimiter4">Direct</label>
+                      </div>
+                    </div>
+                    <template v-if="directFlag">
+                      <input class="form-control" type="text" v-model="directDelimiter" />
+                    </template>
+                    <template v-else>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" @click="ascDescSort()" v-model="delimiter" value="newline" id="delimiter1" />
+                        <label class="form-check-label" for="delimiter1">New line</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" @click="ascDescSort()" v-model="delimiter" value="space" id="delimiter2" />
+                        <label class="form-check-label" for="delimiter2">Space</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" @click="ascDescSort()" v-model="delimiter" value="comma" id="delimiter3" />
+                        <label class="form-check-label" for="delimiter3">Comma</label>
+                      </div>
+                    </template>
+                  </div>
 
-                    <button type="button" class="btn btn-light-secondary btn-sm" @click="textSort('vertical', 'desc')">Vertical desc</button>
+                  <div class="col-12 mb-2">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" @click="ascDescSort($event)" v-model="asdDesc" value="asc" id="inlineRadio1" />
+                      <label class="form-check-label" for="inlineRadio1">asc</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" @click="ascDescSort($event)" v-model="asdDesc" value="desc" id="inlineRadio2" />
+                      <label class="form-check-label" for="inlineRadio2">desc</label>
+                    </div>
+                  </div>
 
-                    <button type="button" class="btn btn-light-secondary btn-sm" @click="textSort('horizontal', 'asc')">Horizontal asc</button>
-                    <button type="button" class="btn btn-light-secondary btn-sm" @click="textSort('horizontal', 'desc')">Horizontal desc</button>
+                  <div class="col-12 mb-2">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" @click="textSort('vertical')" v-model="directionType" value="vertical" id="direction1" />
+                      <label class="form-check-label" for="direction1">Vertical</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" @click="textSort('horizontal')" v-model="directionType" value="horizontal" id="direction2" />
+                      <label class="form-check-label" for="direction2">Horizontal</label>
+                    </div>
                   </div>
                 </div>
                 <textarea class="form-control" rows="19" v-model="orginText" ref="orginText" placeholder="Text sort"></textarea>
@@ -29,6 +69,7 @@
 
               <div class="col-sm">
                 <div class="mb-3" style="padding: 15px; border: 1px solid #dddddd">
+                  <div>{{ directionType }} {{ asdDesc }}</div>
                   <textarea class="form-control" rows="9" v-model="resultText"></textarea>
                 </div>
                 <div class="float-end">
@@ -44,9 +85,13 @@
 </template>
 
 <script>
-import { getStringSize } from "@/utils/common";
-
 import TextCopyButton from "@/components/button/TextCopyButton.vue";
+
+const ALL_SORT_DELIMITER = {
+  space: { regexp: /\s/, char: " " },
+  newline: { regexp: /\n/, char: "\n" },
+  comma: { regexp: /,/, char: "," },
+};
 
 export default {
   components: {
@@ -56,29 +101,59 @@ export default {
     return {
       orginText: "",
       resultText: "",
+      asdDesc: "asc",
+      directionType: "vertical",
+      directFlag: false,
+      delimiter: "newline",
+      directDelimiter: "",
     };
   },
   methods: {
-    textSort(type, ascOrDesc) {
+    ascDescSort(event) {
+      if (event) {
+        this.asdDesc = event.target.value;
+      }
+
+      this.textSort(this.directionType);
+    },
+    textSort(type) {
       let orginText = this.orginText;
+      const ascOrDesc = this.asdDesc;
+      this.directionType = type;
 
       if (orginText == "") {
         orginText = this.$refs.orginText.placeholder;
       }
 
+      let sortDelimiter = "";
+      if (this.directFlag) {
+        if (this.directDelimiter.length < 1) {
+          sortDelimiter = ALL_SORT_DELIMITER["newline"];
+        } else {
+          sortDelimiter = {
+            regexp: new RegExp(this.directDelimiter),
+            char: this.directDelimiter,
+          };
+        }
+      } else {
+        sortDelimiter = ALL_SORT_DELIMITER[this.delimiter];
+      }
+
+      console.log(this.directFlag, this.directDelimiter, orginText, ascOrDesc, sortDelimiter);
+
       let result = "";
       if (type == "horizontal") {
-        result = this.sortHorizontal(orginText.toLowerCase(), ascOrDesc);
+        result = this.sortHorizontal(orginText, ascOrDesc, sortDelimiter);
       } else if (type == "vertical") {
-        result = this.sortVertical(orginText.toLowerCase(), ascOrDesc);
+        result = this.sortVertical(orginText, ascOrDesc, sortDelimiter);
       }
 
       this.resultText = result;
     },
-    sortHorizontal(str, ascOrDesc) {
+    sortHorizontal(str, ascOrDesc, sortDelimiter) {
       const descFlag = ascOrDesc == "desc";
       return str
-        .split("\n")
+        .split(sortDelimiter.regexp)
         .map((line) => {
           // 내림차순 정렬일 경우 배열을 반전
           return line
@@ -90,12 +165,12 @@ export default {
             })
             .join(" ");
         })
-        .join("\n");
+        .join(sortDelimiter.char);
     },
-    sortVertical(str, ascOrDesc) {
+    sortVertical(str, ascOrDesc, sortDelimiter) {
       const items = str
         .trim()
-        .split("\n")
+        .split(sortDelimiter.regexp)
         .map((item) => item.trim());
       // 정렬
       items.sort((a, b) => a.localeCompare(b));
@@ -105,7 +180,7 @@ export default {
         items.reverse();
       }
 
-      return items.join("\n");
+      return items.join(sortDelimiter.char);
     },
   },
 };

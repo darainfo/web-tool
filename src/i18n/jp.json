@@ -11,10 +11,13 @@
     "text_size": "サイズチェック",
     "text_sort": "テキストソート"
   },
-  "not.found": "No Data",
+  "main.title": "ウェブツール",
+  "not.found": "データが見つかりません",
   "prev": "前へ",
   "next": "次へ",
   "close": "閉じる",
-  "viewer.view": "ビューアで見る",
-  "language.select": "Language"
+  "viewer.view": "ビューアで表示",
+  "language.select": "言語を選択",
+  "description": "daracl Webツール JavaScriptユーティリティ ケース変更、テキスト比較、テキスト並べ替え、テキストサイズの調整",
+  "url": "https://pub.moaview.com"
 }

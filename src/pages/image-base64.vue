@@ -3,7 +3,7 @@
     <div class="page-title">
       <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
-          <h3>Image Base64</h3>
+          <h3>{{ $t("menu.image_base64") }}</h3>
           <p class="text-subtitle text-muted">Image Base64 converter</p>
         </div>
       </div>
@@ -48,7 +48,7 @@ import TextCopyButton from "@/components/button/TextCopyButton.vue";
 import { isImageFile, isFileSizeValid } from "@/utils/common";
 
 export default {
-  name: "imageBase64",
+  name: "ImageBase64",
   components: {
     TextCopyButton,
   },

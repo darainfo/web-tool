@@ -11,10 +11,13 @@
     "text_size": "Size 체크",
     "text_sort": "글자 정렬"
   },
+  "main.title": "Web tool",
   "not.found": "데이터가 없습니다",
   "prev": "이전",
   "next": "다음",
   "close": "닫기",
   "viewer.view": "뷰어보기",
-  "language.select": "언어선택"
+  "language.select": "언어선택",
+  "description": "daracl web tool javascript 유틸 case change 텍스트 비교 텍스트 정렬 텍스트 사이즈",
+  "url": "https://pub.moaview.com"
 }

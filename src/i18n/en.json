@@ -11,10 +11,13 @@
     "text_size": "Size Check",
     "text_sort": "Text Sorting"
   },
-  "not.found": "No Data",
+  "main.title": "Web tool",
+  "not.found": "Data not found",
   "prev": "Previous",
   "next": "Next",
   "close": "Close",
   "viewer.view": "View in Viewer",
-  "language.select": "Language"
+  "language.select": "Select Language",
+  "description": "daracl web tool javascript utilities for case change, text comparison, text sorting, and text size",
+  "url": "https://pub.moaview.com"
 }
