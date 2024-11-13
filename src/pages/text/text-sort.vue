@@ -20,7 +20,7 @@
                       Delimiter
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" v-model="directFlag" />
-                        <label class="form-check-label" for="delimiter4">Direct</label>
+                        <label class="form-check-label ckk-near" for="delimiter4">Direct</label>
                       </div>
                     </div>
                     <template v-if="directFlag">
@@ -29,15 +29,15 @@
                     <template v-else>
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" @click="ascDescSort()" v-model="delimiter" value="newline" id="delimiter1" />
-                        <label class="form-check-label" for="delimiter1">New line</label>
+                        <label class="form-check-label ckk-near" for="delimiter1">New line</label>
                       </div>
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" @click="ascDescSort()" v-model="delimiter" value="space" id="delimiter2" />
-                        <label class="form-check-label" for="delimiter2">Space</label>
+                        <label class="form-check-label ckk-near" for="delimiter2">Space</label>
                       </div>
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" @click="ascDescSort()" v-model="delimiter" value="comma" id="delimiter3" />
-                        <label class="form-check-label" for="delimiter3">Comma</label>
+                        <label class="form-check-label ckk-near" for="delimiter3">Comma</label>
                       </div>
                     </template>
                   </div>
@@ -45,22 +45,22 @@
                   <div class="col-12 mb-2">
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" @click="ascDescSort($event)" v-model="asdDesc" value="asc" id="inlineRadio1" />
-                      <label class="form-check-label" for="inlineRadio1">asc</label>
+                      <label class="form-check-label ckk-near" for="inlineRadio1">Asc</label>
                     </div>
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" @click="ascDescSort($event)" v-model="asdDesc" value="desc" id="inlineRadio2" />
-                      <label class="form-check-label" for="inlineRadio2">desc</label>
+                      <label class="form-check-label ckk-near" for="inlineRadio2">Desc</label>
                     </div>
                   </div>
 
                   <div class="col-12 mb-2">
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" @click="textSort('vertical')" v-model="directionType" value="vertical" id="direction1" />
-                      <label class="form-check-label" for="direction1">Vertical</label>
+                      <label class="form-check-label ckk-near" for="direction1">Vertical</label>
                     </div>
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" @click="textSort('horizontal')" v-model="directionType" value="horizontal" id="direction2" />
-                      <label class="form-check-label" for="direction2">Horizontal</label>
+                      <label class="form-check-label ckk-near" for="direction2">Horizontal</label>
                     </div>
                   </div>
                 </div>

@@ -130,6 +130,11 @@
   }
 }
 .form-check {
+  .form-check-label {
+    &.ckk-near {
+      margin-left: -5px;
+    }
+  }
   .form-check-input {
     &[class*="bg-"] {
       border: 0;
