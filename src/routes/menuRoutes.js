@@ -38,6 +38,13 @@ export const routes = [
           i18n: "menu.text_sort",
         },
       },
+      {
+        component: () => import("@/pages/text/text-remove-duplicates.vue"),
+        path: "removeDuplicates",
+        meta: {
+          i18n: "menu.remove_duplicates",
+        },
+      },
     ],
   },
   {
@@ -61,6 +68,23 @@ export const routes = [
       i18n: "menu.image_base64",
     },
   },
+  {
+    path: "/util",
+    redirect: "/text/caseChange",
+    meta: {
+      i18n: "menu.util",
+    },
+    children: [
+      {
+        component: () => import("@/pages/util/uuid-generate.vue"),
+        path: "uuidGenerate",
+        meta: {
+          i18n: "menu.uuid_generate",
+        },
+      },
+    ],
+  },
+
   {
     path: "/:catchAll(.*)",
     component: () => import("@/components/common/not-found.vue"),

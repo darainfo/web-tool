@@ -14,12 +14,12 @@ export default {
 
   methods: {
     copyBtn() {
-      let copyString = "";
-      let copyFieldElement = document.querySelector(this.copyField);
-      if (copyFieldElement) {
+      let copyString = this.copyField;
+      try {
+        let copyFieldElement = document.querySelector(this.copyField);
         copyString = copyFieldElement.value;
-      } else {
-        copyString = this.copyField;
+      } catch (e) {
+        //ignore
       }
 
       copyText(copyString);

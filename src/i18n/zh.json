@@ -9,7 +9,8 @@
     "text": "文本",
     "case_change": "大小写转换",
     "text_size": "大小检查",
-    "text_sort": "文字排序"
+    "text_sort": "文字排序",
+    "remove_duplicates": "移除重复"
   },
   "main.title": "网页工具",
   "not.found": "数据未找到",
@@ -19,5 +20,5 @@
   "viewer.view": "在查看器中查看",
   "language.select": "选择语言",
   "description": "daracl 网页工具，JavaScript 实用程序，用于大小写转换、文本比较、文本排序和文本大小调整",
-  "url": "https://pub.moaview.com"
+  "url": "https://tool.daracl.com"
 }

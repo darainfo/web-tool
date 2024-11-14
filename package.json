@@ -38,6 +38,7 @@
     "resolve-url-loader": "^5.0.0",
     "sass": "^1.67.0",
     "sass-loader": "^13.2.0",
+    "uuid": "^11.0.3",
     "vite": "4.4.9",
     "vite-plugin-monaco-editor": "^1.1.0",
     "vite-plugin-nunjucks": "^0.1.10",

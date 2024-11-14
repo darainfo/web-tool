@@ -17,7 +17,7 @@ export default {
       meta: [
         { name: "robots", content: "index, follow" },
         { property: "description", content: i18n.global.t("description") },
-        { property: "og:title", content: i18n.global.t("title") },
+        { property: "og:title", content: i18n.global.t("main.title") },
         { property: "og:description", content: i18n.global.t("description") },
         { property: "og:url", content: i18n.global.t("url") },
       ],

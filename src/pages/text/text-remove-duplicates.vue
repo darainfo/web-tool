@@ -3,7 +3,7 @@
     <div class="page-title">
       <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
-          <h3>{{ $t("menu.text_sort") }}</h3>
+          <h3>{{ $t("menu.remove_duplicates") }}</h3>
         </div>
       </div>
     </div>
@@ -28,6 +28,10 @@
                     </template>
                     <template v-else>
                       <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" @click="ascDescSort()" v-model="delimiter" value="comma" id="delimiter3" />
+                        <label class="form-check-label ckk-near" for="delimiter3">Comma</label>
+                      </div>
+                      <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" @click="ascDescSort()" v-model="delimiter" value="newline" id="delimiter1" />
                         <label class="form-check-label ckk-near" for="delimiter1">New line</label>
                       </div>
@@ -35,41 +39,19 @@
                         <input class="form-check-input" type="radio" @click="ascDescSort()" v-model="delimiter" value="space" id="delimiter2" />
                         <label class="form-check-label ckk-near" for="delimiter2">Space</label>
                       </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" @click="ascDescSort()" v-model="delimiter" value="comma" id="delimiter3" />
-                        <label class="form-check-label ckk-near" for="delimiter3">Comma</label>
-                      </div>
                     </template>
                   </div>
 
-                  <div class="col-12 mb-2">
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" @click="ascDescSort($event)" v-model="asdDesc" value="asc" id="inlineRadio1" />
-                      <label class="form-check-label ckk-near" for="inlineRadio1">Asc</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" @click="ascDescSort($event)" v-model="asdDesc" value="desc" id="inlineRadio2" />
-                      <label class="form-check-label ckk-near" for="inlineRadio2">Desc</label>
-                    </div>
-                  </div>
-
-                  <div class="col-12 mb-2">
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" @click="textSort('vertical')" v-model="directionType" value="vertical" id="direction1" />
-                      <label class="form-check-label ckk-near" for="direction1">Vertical</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" @click="textSort('horizontal')" v-model="directionType" value="horizontal" id="direction2" />
-                      <label class="form-check-label ckk-near" for="direction2">Horizontal</label>
-                    </div>
+                  <div class="btn-example">
+                    <button type="button" class="btn btn-light-secondary btn-sm" @click="actionRun('reset')">Reset</button>
+                    <button type="button" class="btn btn-primary btn-sm" @click="actionRun('check')">Check</button>
                   </div>
                 </div>
-                <textarea class="form-control" rows="19" v-model="orginText" ref="orginText" placeholder="Text sort"></textarea>
+                <textarea class="form-control" rows="10" v-model="orginText" ref="orginText" placeholder="Text sort"></textarea>
               </div>
 
               <div class="col-sm">
                 <div class="mb-3" style="padding: 15px; border: 1px solid #dddddd">
-                  <div>{{ directionType }} {{ asdDesc }}</div>
                   <textarea class="form-control" rows="9" v-model="resultText"></textarea>
                 </div>
                 <div class="float-end">
@@ -101,24 +83,18 @@ export default {
     return {
       orginText: "",
       resultText: "",
-      asdDesc: "asc",
-      directionType: "vertical",
       directFlag: false,
-      delimiter: "newline",
+      delimiter: "comma",
       directDelimiter: "",
     };
   },
   methods: {
-    ascDescSort(event) {
-      if (event) {
-        this.asdDesc = event.target.value;
+    actionRun(type) {
+      if (type == "reset") {
+        this.orginText = "";
+        return;
       }
-
-      this.textSort(this.directionType);
-    },
-    textSort(type) {
       let orginText = this.orginText;
-      const ascOrDesc = this.asdDesc;
       this.directionType = type;
 
       if (orginText == "") {
@@ -139,46 +115,21 @@ export default {
         sortDelimiter = ALL_SORT_DELIMITER[this.delimiter];
       }
 
-      let result = "";
-      if (type == "horizontal") {
-        result = this.sortHorizontal(orginText, ascOrDesc, sortDelimiter);
-      } else if (type == "vertical") {
-        result = this.sortVertical(orginText, ascOrDesc, sortDelimiter);
-      }
-
-      this.resultText = result;
+      this.resultText = this.duplicatesRemove(orginText, sortDelimiter);
     },
-    sortHorizontal(str, ascOrDesc, sortDelimiter) {
-      const descFlag = ascOrDesc == "desc";
-      return str
-        .split(sortDelimiter.regexp)
-        .map((line) => {
-          // 내림차순 정렬일 경우 배열을 반전
-          return line
-            .split(" ")
-            .map((word) => {
-              const wordSort = word.split("").sort((a, b) => a.localeCompare(b));
-
-              return descFlag ? wordSort.reverse().join("") : wordSort.join("");
-            })
-            .join(" ");
-        })
-        .join(sortDelimiter.char);
-    },
-    sortVertical(str, ascOrDesc, sortDelimiter) {
+    duplicatesRemove(str, sortDelimiter) {
       const items = str
         .trim()
         .split(sortDelimiter.regexp)
         .map((item) => item.trim());
-      // 정렬
-      items.sort((a, b) => a.localeCompare(b));
 
-      // 내림차순 처리
-      if (ascOrDesc == "desc") {
-        items.reverse();
-      }
-
-      return items.join(sortDelimiter.char);
+      const result = [];
+      items.forEach(function (item) {
+        if (result.indexOf(item) < 0) {
+          result.push(item);
+        }
+      });
+      return result.join(sortDelimiter.char);
     },
   },
 };
