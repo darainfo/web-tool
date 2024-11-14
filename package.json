@@ -2,7 +2,7 @@
   "name": "web-tools",
   "scripts": {
     "predeploy": "vite build",
-    "ghdeploy": "gh-pages -d dist",
+    "deploy": "gh-pages -d dist --cname tool.daracl.com",
     "build": "vite build",
     "dev": "vite",
     "preview": "vite preview"

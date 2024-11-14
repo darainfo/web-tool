@@ -14,7 +14,7 @@
           <form id="mainForm">
             <div class="row">
               <div class="col-sm mb-3">
-                <textarea class="form-control" rows="19" v-model="orginText" @input="sizeCheck()" placeholder="Enter the characters to check size"></textarea>
+                <textarea class="form-control" rows="10" v-model="orginText" placeholder="Enter the characters to check size"></textarea>
 
                 <div class="mb-3 col-sm-12">
                   <div class="text-center">
@@ -34,25 +34,27 @@
 
 <script>
 import { getStringSize } from "@/utils/common";
+import { ref, watch } from "vue";
 
 export default {
-  data() {
+  setup() {
+    const orginText = ref("");
+    const resultText = ref("");
+
+    watch(
+      orginText,
+      (newValue, oldValue) => {
+        const size = getStringSize(newValue);
+
+        resultText.value = `Char length : ${size.length}, byte : ${size.byte}`;
+      },
+      { immediate: true },
+    );
+
     return {
-      orginText: "",
-      resultText: "",
+      orginText,
+      resultText,
     };
-  },
-  mounted() {
-    this.sizeCheck();
-  },
-  methods: {
-    sizeCheck() {
-      const orginText = this.orginText || "";
-
-      const size = getStringSize(orginText);
-
-      this.resultText = `Char length : ${size.length}, byte : ${size.byte}`;
-    },
   },
 };
 </script>
