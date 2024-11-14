@@ -1,0 +1,1 @@
+import{_ as n,c as r,b as e,o as t}from"./index-44f40112.js";const l={};function a(c,o){return t(),r("div",null,o[0]||(o[0]=[e("h1",null,"404 Not Found",-1),e("p",null,"Sorry, the page you are looking for could not be found.",-1)]))}const u=n(l,[["render",a]]);export{u as default};
