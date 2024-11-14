@@ -16,13 +16,12 @@
 <script>
 import { getAllMenuItem } from "@/routes/menuRoutes";
 
-const allPageItems = [];
-function getAllPage(arr) {
+function getAllPage(arr, allPageItems) {
   for (const item of arr) {
     if (item.meta.hideMenu === true) continue;
 
     if (item.isChild) {
-      getAllPage(item.children);
+      getAllPage(item.children, allPageItems);
     } else {
       allPageItems.push(item);
     }
@@ -33,9 +32,9 @@ function getAllPage(arr) {
 
 export default {
   setup() {
-    const menuList = getAllMenuItem();
+    const menuList = getAllMenuItem().list;
 
-    const allPages = getAllPage(menuList);
+    const allPages = getAllPage(menuList, []);
 
     return {
       items: allPages,

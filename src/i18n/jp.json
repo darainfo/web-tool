@@ -10,7 +10,8 @@
     "case_change": "ケース変換",
     "text_size": "サイズチェック",
     "text_sort": "テキストソート",
-    "remove_duplicates": "重複の削除"
+    "remove_duplicates": "重複の削除",
+    "uuid_generate": "UUID 生成"
   },
   "main.title": "ウェブツール",
   "not.found": "データが見つかりません",
@@ -19,6 +20,6 @@
   "close": "閉じる",
   "viewer.view": "ビューアで表示",
   "language.select": "言語を選択",
-  "description": "daracl Webツール JavaScriptユーティリティ ケース変更、テキスト比較、テキスト並べ替え、テキストサイズの調整",
+  "description": "daracl Webツール JavaScriptユーティリティ ケース変更、テキスト比較、テキスト並べ替え、テキストサイズの調整 qrcode Generator",
   "url": "https://tool.daracl.com"
 }

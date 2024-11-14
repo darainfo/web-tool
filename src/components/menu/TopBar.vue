@@ -57,7 +57,7 @@ export default {
   props: {
     logoTitle: {
       type: String,
-      default: "Web Tool",
+      default: "WebUtils",
     },
   },
   created() {

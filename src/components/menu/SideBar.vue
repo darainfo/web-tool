@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { getAllMenuItem, G_ALL_MENU_ITEM } from "@/routes/menuRoutes";
+import { getAllMenuItem } from "@/routes/menuRoutes";
 import SideMenu from "./SideMenu.vue";
 import { watch, reactive, ref } from "vue";
 import { useRoute } from "vue-router";
@@ -39,16 +39,21 @@ export default {
   setup() {
     const currentPagePath = useRoute();
     let beforeActiveItem = {};
-    const menuList = getAllMenuItem();
+    const menuInfo = getAllMenuItem();
+
+    const menuList = menuInfo.list;
+    const allMenuInfo = menuInfo.pathAndMenu;
 
     watch(currentPagePath, (newRoute, oldRoute) => {
       let newPath = newRoute.path;
       newPath = newPath.endsWith("/") ? newPath.replace(/\/$/, "") : newPath;
 
-      if (G_ALL_MENU_ITEM[newPath]) {
-        setParentEnableActive(beforeActiveItem, false, false);
-        setParentEnableActive(G_ALL_MENU_ITEM[newPath], true, false);
-        beforeActiveItem = G_ALL_MENU_ITEM[newPath];
+      if (allMenuInfo[newPath]) {
+        if (beforeActiveItem.path) {
+          setParentEnableActive(beforeActiveItem, false, false);
+        }
+        setParentEnableActive(allMenuInfo[newPath], true, false);
+        beforeActiveItem = allMenuInfo[newPath];
       }
     });
 
@@ -62,7 +67,7 @@ export default {
         enableSearch.value = true;
         const regExpSch = new RegExp(searchText.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1"), "i");
         searchList.length = 0;
-        for (const [key, item] of Object.entries(G_ALL_MENU_ITEM)) {
+        for (const [key, item] of Object.entries(allMenuInfo)) {
           if (!item.isChild && i18n.global.t(item.meta.i18n).match(regExpSch) != null) {
             searchList.push(item);
           }

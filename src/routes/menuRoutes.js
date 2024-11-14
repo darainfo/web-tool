@@ -70,7 +70,7 @@ export const routes = [
   },
   {
     path: "/util",
-    redirect: "/text/caseChange",
+    redirect: "/util/uuidGenerate",
     meta: {
       i18n: "menu.util",
     },
@@ -104,7 +104,7 @@ function getRoutePath(arr, parentItem, returnArr) {
   for (const item of arr) {
     if (item.meta.hideMenu === true) continue;
 
-    const isChild = item.children && item.children.length > 0 ? true : false;
+    const isChild = item.children && item.children.length > 0;
 
     const reItem = {};
 
@@ -121,17 +121,17 @@ function getRoutePath(arr, parentItem, returnArr) {
 
 export function getAllMenuItem() {
   const menuList = [];
-  deepCopyWithSlice(routes, { path: "" }, menuList);
+  const pathAndMenu = {};
+  deepCopyWithSlice(routes, { path: "" }, menuList, pathAndMenu);
 
-  return menuList;
+  return { list: menuList, pathAndMenu: pathAndMenu };
 }
 
-export const G_ALL_MENU_ITEM = {};
-function deepCopyWithSlice(arr, parentItem, returnArr) {
+function deepCopyWithSlice(arr, parentItem, returnArr, pathAndMenu) {
   for (const item of arr) {
     if (item.meta.hideMenu === true) continue;
 
-    const isChild = item.children && item.children.length > 0 ? true : false;
+    const isChild = item.children && item.children.length > 0;
 
     const reItem = reactive({ isChild: isChild, isOpen: false, isActive: false, parentNode: parentItem });
 
@@ -142,11 +142,11 @@ function deepCopyWithSlice(arr, parentItem, returnArr) {
     }
 
     if (isChild) {
-      reItem["children"] = deepCopyWithSlice(item.children, reItem, []);
+      reItem["children"] = deepCopyWithSlice(item.children, reItem, [], pathAndMenu);
     }
     returnArr.push(reItem);
 
-    G_ALL_MENU_ITEM[reItem["path"]] = reItem;
+    pathAndMenu[reItem["path"]] = reItem;
   }
   return returnArr;
 }

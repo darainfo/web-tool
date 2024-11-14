@@ -10,7 +10,8 @@
     "case_change": "Case Conversion",
     "text_size": "Size Check",
     "text_sort": "Text Sorting",
-    "remove_duplicates": "Remove Duplicates"
+    "remove_duplicates": "Remove Duplicates",
+    "uuid_generate": "UUID Generator"
   },
   "main.title": "Web tool",
   "not.found": "Data not found",
@@ -19,6 +20,6 @@
   "close": "Close",
   "viewer.view": "View in Viewer",
   "language.select": "Select Language",
-  "description": "daracl web tool javascript utilities for case change, text comparison, text sorting, and text size",
+  "description": "daracl web tool javascript utilities for case change, text comparison, text sorting, and text size, qrcode Generator",
   "url": "https://tool.daracl.com"
 }
