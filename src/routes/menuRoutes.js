@@ -55,12 +55,21 @@ export const routes = [
     },
   },
   {
+    component: () => import("@/pages/date-calculation.vue"),
+    path: "/dateCalculation",
+    meta: {
+      i18n: "menu.date_calculation",
+    },
+  },
+
+  {
     component: () => import("@/pages/qr-generator.vue"),
     path: "/qrGenerator",
     meta: {
       i18n: "menu.qr_qenerator",
     },
   },
+
   {
     component: () => import("@/pages/image-base64.vue"),
     path: "/imageToDataUrl",

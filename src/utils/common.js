@@ -175,3 +175,29 @@ export function isFileSizeValid(file, maxSizeInMB) {
   const maxSizeInBytes = maxSizeInMB * 1024 * 1024; // MB to Bytes
   return file.size <= maxSizeInBytes;
 }
+
+export function calculateDateDifference(startDate, endDate) {
+  // 날짜 차이 계산
+  let years = endDate.getFullYear() - startDate.getFullYear();
+  let months = endDate.getMonth() - startDate.getMonth();
+  let days = endDate.getDate() - startDate.getDate();
+
+  // 월 차이가 음수인 경우, 1년을 빼고 월 수를 조정
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  // 일이 음수인 경우, 이전 월의 날 수를 더해서 조정
+  const daysInPreviousMonth = new Date(endDate.getFullYear(), endDate.getMonth(), 0).getDate();
+  if (days < 0) {
+    months--;
+    days += daysInPreviousMonth;
+    if (months < 0) {
+      months += 12;
+      years--;
+    }
+  }
+
+  return { years, months, days };
+}

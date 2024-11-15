@@ -2,6 +2,9 @@
   "index": {
     "title": "英文"
   },
+  "main.title": "网页工具",
+  "description": "daracl 网页工具，JavaScript 实用程序，用于大小写转换、文本比较、文本排序和文本大小调整 qrcode Generator",
+  "url": "https://tool.daracl.com",
   "menu": {
     "text_diff": "文字比较",
     "qr_qenerator": "QR生成器",
@@ -11,15 +14,16 @@
     "text_size": "大小检查",
     "text_sort": "文字排序",
     "remove_duplicates": "移除重复",
-    "uuid_generate": "UUID 生成"
+    "util": "Utils",
+    "uuid_generate": "UUID 生成",
+    "date_calculation": "日期计算 "
   },
-  "main.title": "网页工具",
   "not.found": "数据未找到",
   "prev": "上一页",
   "next": "下一页",
   "close": "关闭",
   "viewer.view": "在查看器中查看",
   "language.select": "选择语言",
-  "description": "daracl 网页工具，JavaScript 实用程序，用于大小写转换、文本比较、文本排序和文本大小调整 qrcode Generator",
-  "url": "https://tool.daracl.com"
+  "start.end.dt.over": "开始日期不能晚于结束日期。",
+  "elapsed.day": "经过的天数"
 }

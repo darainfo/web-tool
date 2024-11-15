@@ -2,7 +2,7 @@ export const Locales = {
   ko: "ko",
   en: "en",
   zh: "zh",
-  jp: "jp",
+  ja: "ja",
 };
 
 export const LayoutLanguages = [
@@ -17,5 +17,9 @@ export const LayoutLanguages = [
   {
     param: Locales.zh,
     title: "简体中文",
+  },
+  {
+    param: Locales.ja,
+    title: "日本語",
   },
 ];

@@ -9,7 +9,7 @@
   },
   "version": "0.0.1",
   "dependencies": {
-    "@daracl/datetimepicker": "^0.0.9",
+    "@daracl/datetimepicker": "^0.0.10",
     "@daracl/dialog": "^0.0.7",
     "@daracl/form": "^0.0.17",
     "@daracl/toast": "^0.0.7",

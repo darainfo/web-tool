@@ -18,7 +18,7 @@
                   <option v-for="(item, key) in allUuidItems" :value="item.type" :key="key">{{ item.name }}</option>
                 </select>
 
-                <input class="form-control mb-3" v-model="count" type="number" />
+                <input class="form-control mb-3" min="1" v-model="count" type="number" />
 
                 <div class="col-12 float-end mb-3" style="text-align: center">
                   <button type="button" class="btn btn-light-secondary btn-sm" @click="uuidGen()">Generate</button>

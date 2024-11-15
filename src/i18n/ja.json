@@ -2,6 +2,9 @@
   "index": {
     "title": "英語"
   },
+  "main.title": "ウェブツール",
+  "description": "daracl Webツール JavaScriptユーティリティ ケース変更、テキスト比較、テキスト並べ替え、テキストサイズの調整 qrcode Generator",
+  "url": "https://tool.daracl.com",
   "menu": {
     "text_diff": "テキスト比較",
     "qr_qenerator": "QRジェネレーター",
@@ -11,15 +14,16 @@
     "text_size": "サイズチェック",
     "text_sort": "テキストソート",
     "remove_duplicates": "重複の削除",
-    "uuid_generate": "UUID 生成"
+    "util": "Utils",
+    "uuid_generate": "UUID 生成",
+    "date_calculation": "日付計算"
   },
-  "main.title": "ウェブツール",
   "not.found": "データが見つかりません",
   "prev": "前へ",
   "next": "次へ",
   "close": "閉じる",
   "viewer.view": "ビューアで表示",
   "language.select": "言語を選択",
-  "description": "daracl Webツール JavaScriptユーティリティ ケース変更、テキスト比較、テキスト並べ替え、テキストサイズの調整 qrcode Generator",
-  "url": "https://tool.daracl.com"
+  "start.end.dt.over": "開始日が終了日を超えてはいけません。",
+  "elapsed.day": "経過日"
 }

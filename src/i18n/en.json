@@ -2,6 +2,9 @@
   "index": {
     "title": "In English"
   },
+  "main.title": "Web tool",
+  "description": "daracl web tool javascript utilities for case change, text comparison, text sorting, and text size, qrcode Generator",
+  "url": "https://tool.daracl.com",
   "menu": {
     "text_diff": "Text Comparison",
     "qr_qenerator": "QR Generator",
@@ -11,15 +14,17 @@
     "text_size": "Size Check",
     "text_sort": "Text Sorting",
     "remove_duplicates": "Remove Duplicates",
-    "uuid_generate": "UUID Generator"
+    "util": "Utils",
+    "uuid_generate": "UUID Generator",
+    "date_calculation": "Date calculation"
   },
-  "main.title": "Web tool",
+
   "not.found": "Data not found",
   "prev": "Previous",
   "next": "Next",
   "close": "Close",
   "viewer.view": "View in Viewer",
   "language.select": "Select Language",
-  "description": "daracl web tool javascript utilities for case change, text comparison, text sorting, and text size, qrcode Generator",
-  "url": "https://tool.daracl.com"
+  "start.end.dt.over": "The start date cannot be later than the end date.",
+  "elapsed.day": "Elapsed days"
 }
