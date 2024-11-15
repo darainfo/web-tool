@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    <url>
+    <loc>https://tool.daracl.com/text/caseChange</loc>
+    <lastmod>Fri Nov 15 2024 20:55:43 GMT+0900 (대한민국 표준시)</lastmod>
+  </url>
+<url>
+    <loc>https://tool.daracl.com/text/textSize</loc>
+    <lastmod>Fri Nov 15 2024 20:55:43 GMT+0900 (대한민국 표준시)</lastmod>
+  </url>
+<url>
+    <loc>https://tool.daracl.com/text/textSort</loc>
+    <lastmod>Fri Nov 15 2024 20:55:43 GMT+0900 (대한민국 표준시)</lastmod>
+  </url>
+<url>
+    <loc>https://tool.daracl.com/text/removeDuplicates</loc>
+    <lastmod>Fri Nov 15 2024 20:55:43 GMT+0900 (대한민국 표준시)</lastmod>
+  </url>
+<url>
+    <loc>https://tool.daracl.com/textDiff</loc>
+    <lastmod>Fri Nov 15 2024 20:55:43 GMT+0900 (대한민국 표준시)</lastmod>
+  </url>
+<url>
+    <loc>https://tool.daracl.com/dateCalculation</loc>
+    <lastmod>Fri Nov 15 2024 20:55:43 GMT+0900 (대한민국 표준시)</lastmod>
+  </url>
+<url>
+    <loc>https://tool.daracl.com/qrGenerator</loc>
+    <lastmod>Fri Nov 15 2024 20:55:43 GMT+0900 (대한민국 표준시)</lastmod>
+  </url>
+<url>
+    <loc>https://tool.daracl.com/imageToDataUrl</loc>
+    <lastmod>Fri Nov 15 2024 20:55:43 GMT+0900 (대한민국 표준시)</lastmod>
+  </url>
+<url>
+    <loc>https://tool.daracl.com/util/uuidGenerate</loc>
+    <lastmod>Fri Nov 15 2024 20:55:43 GMT+0900 (대한민국 표준시)</lastmod>
+  </url>
+  </urlset>
