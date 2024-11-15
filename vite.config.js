@@ -11,6 +11,10 @@ import monacoEditorPlugin from "vite-plugin-monaco-editor";
 
 import { getAllRoutePath } from "./src/routes/menuRoutes";
 
+import { sitemMapXml } from "./sitemap";
+
+import packageJson from "./package.json";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -56,8 +60,35 @@ export default defineConfig((env) => ({
       staticDir: path.join(__dirname, "dist"),
       // Required - Routes to render.
       routes: getAllRoutePath(),
+      //
+      // postProcess: (renderedRoutes) => {
+      //   console.log("Prerendering finished!");
+      //   console.log("Rendered routes:", renderedRoutes);
+      // },
     }),
+
+    {
+      name: "my-sitemap-generate-plugin", // 플러그인 이름
+      closeBundle() {
+        console.log("All bundles are generated!");
+
+        const sitemapPath = path.resolve(__dirname, "dist", "sitemap.xml");
+
+        sitemMapXml(fs, sitemapPath, packageJson.homepage, getAllRoutePath());
+      },
+    },
     commonjs(),
+    // {
+    //   name: "post-build-plugin",
+    //   // 빌드가 끝난 후 작업을 처리
+    //   buildEnd() {
+    //     //console.log(" 1111  빌드가 완료되었습니다!");
+
+    //     const sitemapPath = path.resolve(__dirname, "dist", "sitemap.xml");
+
+    //     sitemMapXml(fs, sitemapPath, getAllRoutePath());
+    //   },
+    // },
     viteStaticCopy({
       targets: [
         {

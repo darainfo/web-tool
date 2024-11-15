@@ -1,11 +1,13 @@
 {
   "name": "web-tools",
+  "homepage": "https://tool.daracl.com",
   "scripts": {
     "predeploy": "vite build",
     "deploy": "gh-pages -d dist --cname tool.daracl.com",
     "build": "vite build",
     "dev": "vite",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sitemap": "node sitemap.js"
   },
   "version": "0.0.1",
   "dependencies": {
