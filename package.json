@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "sitemap": "node sitemap.js"
   },
-  "version": "0.0.1",
+  "version": "0.0.2",
   "dependencies": {
     "@daracl/datetimepicker": "^0.0.10",
     "@daracl/dialog": "^0.0.7",
