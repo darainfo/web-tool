@@ -49,8 +49,6 @@ export default {
   data() {
     const currentLang = currentLocaleLanguage();
 
-    console.log("currentLang : ", currentLang);
-
     const selectItem = LocaleLanguages.find((langItem) => langItem.param == currentLang);
 
     return {
