@@ -5,7 +5,7 @@ export const Locales = {
   ja: "ja",
 };
 
-export const LayoutLanguages = [
+export const LocaleLanguages = [
   {
     param: Locales.ko,
     title: "한국어",
