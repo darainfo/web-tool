@@ -3,38 +3,38 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
     <loc>https://tool.daracl.com/text/caseChange</loc>
-    <lastmod>2024-11-23T20:35:35+09:00</lastmod>
+    <lastmod>2024-11-24T16:59:32+09:00</lastmod>
   </url>
 <url>
     <loc>https://tool.daracl.com/text/textSize</loc>
-    <lastmod>2024-11-23T20:35:35+09:00</lastmod>
+    <lastmod>2024-11-24T16:59:32+09:00</lastmod>
   </url>
 <url>
     <loc>https://tool.daracl.com/text/textSort</loc>
-    <lastmod>2024-11-23T20:35:35+09:00</lastmod>
+    <lastmod>2024-11-24T16:59:32+09:00</lastmod>
   </url>
 <url>
     <loc>https://tool.daracl.com/text/removeDuplicates</loc>
-    <lastmod>2024-11-23T20:35:35+09:00</lastmod>
+    <lastmod>2024-11-24T16:59:32+09:00</lastmod>
   </url>
 <url>
     <loc>https://tool.daracl.com/textDiff</loc>
-    <lastmod>2024-11-23T20:35:35+09:00</lastmod>
+    <lastmod>2024-11-24T16:59:32+09:00</lastmod>
   </url>
 <url>
     <loc>https://tool.daracl.com/dateCalculation</loc>
-    <lastmod>2024-11-23T20:35:35+09:00</lastmod>
+    <lastmod>2024-11-24T16:59:32+09:00</lastmod>
   </url>
 <url>
     <loc>https://tool.daracl.com/qrGenerator</loc>
-    <lastmod>2024-11-23T20:35:35+09:00</lastmod>
+    <lastmod>2024-11-24T16:59:32+09:00</lastmod>
   </url>
 <url>
     <loc>https://tool.daracl.com/imageToDataUrl</loc>
-    <lastmod>2024-11-23T20:35:35+09:00</lastmod>
+    <lastmod>2024-11-24T16:59:32+09:00</lastmod>
   </url>
 <url>
     <loc>https://tool.daracl.com/util/uuidGenerate</loc>
-    <lastmod>2024-11-23T20:35:35+09:00</lastmod>
+    <lastmod>2024-11-24T16:59:32+09:00</lastmod>
   </url>
   </urlset>
