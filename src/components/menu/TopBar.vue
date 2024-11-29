@@ -29,7 +29,7 @@
         </div>
       </li>
       <li>
-        <button class="btn btn-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">Language</button>
+        <button class="btn btn-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ selectItem.title }}</button>
         <ul class="dropdown-menu">
           <li v-for="(item, key) in language" :key="key">
             <a href="javascript:;" class="dropdown-item" @click="selectLanguage(item)">{{ item.title }}</a>
@@ -40,18 +40,24 @@
   </div>
 </template>
 <script>
-import { isMobile, isMinimumSize } from "@/utils/utils";
-import { LayoutLanguages } from "@/i18n/config/locales";
-import { i18n, changeLanguage } from "@/i18n";
+import { isMinimumSize } from "@/utils/utils";
+import { LocaleLanguages } from "@/i18n/config/locales";
+import { i18n, changeLanguage, currentLocaleLanguage } from "@/i18n";
 
 const THEME_KEY = "theme";
 export default {
   data() {
+    const currentLang = currentLocaleLanguage();
+
+    const selectItem = LocaleLanguages.find((langItem) => langItem.param == currentLang);
+
     return {
       isMenuOpen: false,
       isThemeChecked: false,
-      language: LayoutLanguages,
+      language: LocaleLanguages,
       enableLanguage: false,
+
+      selectItem,
     };
   },
   props: {
@@ -102,6 +108,7 @@ export default {
       });
     },
     selectLanguage(lang) {
+      this.selectItem = lang;
       i18n.global.locale = lang.param;
       changeLanguage(lang.param);
       this.enableLanguage = false;
