@@ -1,4 +1,4 @@
-import{t as I,m as N}from"./text-diff-4958a94b.js";import"./index-54f07b8a.js";/*!-----------------------------------------------------------------------------
+import{t as I,m as N}from"./text-diff-0f998177.js";import"./index-615a3933.js";/*!-----------------------------------------------------------------------------
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Version: 0.52.0(f6dc0eb8fce67e57f6036f4769d92c1666cdf546)
  * Released under the MIT license
