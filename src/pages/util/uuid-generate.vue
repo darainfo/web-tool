@@ -18,7 +18,24 @@
                   <option v-for="(item, key) in allUuidItems" :value="item.type" :key="key">{{ item.name }}</option>
                 </select>
 
-                <input class="form-control mb-3" min="1" v-model="count" type="number" />
+                <template v-if="uuidType == 'v5'">
+                  <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" style="width: 142px">Namespace(UUID)</span>
+                    </div>
+                    <input type="text" class="form-control" v-model="namespace" placeholder="Namespace" />
+                  </div>
+
+                  <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" style="width: 142px">Change value</span>
+                    </div>
+                    <input type="text" class="form-control" v-model="changeStr" placeholder="Namespace" />
+                  </div>
+                </template>
+                <template v-else>
+                  <input class="form-control mb-3" min="1" v-model="count" type="number" />
+                </template>
 
                 <div class="col-12 float-end mb-3" style="text-align: center">
                   <button type="button" class="btn btn-light-secondary btn-sm" @click="uuidGen()">Generate</button>
@@ -52,6 +69,7 @@ const allUuidItems = [
   { type: "v6", fn: uuidv6, name: "Timestamp, reordered" },
   { type: "v7", fn: uuidv7, name: "Unix Epoch time-based" },
 ];
+
 export default {
   components: {
     TextCopyButton,
@@ -61,6 +79,8 @@ export default {
       uuidType: "v4",
       count: 1,
       resultText: "",
+      namespace: uuidv5.DNS,
+      changeStr: "",
       allUuidItems,
     };
   },
@@ -68,14 +88,22 @@ export default {
   methods: {
     uuidGen() {
       const uuidType = this.uuidType;
-      const count = this.count;
+      const count = uuidType == "v5" ? 1 : this.count;
 
       const item = allUuidItems.find((item) => item.type === uuidType);
 
       const result = [];
 
-      for (let i = 0; i < count; i++) {
-        result.push(item.fn());
+      try {
+        for (let i = 0; i < count; i++) {
+          if (uuidType == "v5") {
+            result.push(uuidv5(this.changeStr, this.namespace));
+          } else {
+            result.push(item.fn());
+          }
+        }
+      } catch (e) {
+        result.push(e.message);
       }
 
       this.resultText = result.join("\n");
