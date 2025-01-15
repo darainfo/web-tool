@@ -64,17 +64,18 @@ export default defineConfig((env) => ({
       postProcess: (renderedRoutes) => {
         //console.log("Prerendering finished!");
         //console.log("Rendered routes:", renderedRoutes);
-
+        /*
         let metaTags = `<meta name="robots" content="index, follow">
 <meta property="description" content="daracl web tool javascript utilities for case change, text comparison, text sorting, and text size, qrcode Generator">
 <meta property="og:title" content="Web tool">
 <meta property="og:description" content="daracl web tool javascript utilities for case change, text comparison, text sorting, and text size, qrcode Generator">
 <meta property="og:url" content="https://tool.daracl.com">
 </head>`;
+      
         let html = renderedRoutes.html;
 
         renderedRoutes.html = html.replace("</head>", metaTags);
-
+*/
         return renderedRoutes;
       },
     }),
