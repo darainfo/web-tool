@@ -4,7 +4,8 @@
   "scripts": {
     "predeploy": "vite build",
     "deploy": "gh-pages -d dist --cname tool.daracl.com",
-    "release": "gh release create v1.0.0 ./dist/* --title \"Release v1.0.0\" --generate-notes",
+    "zip": "bestzip dist/release.zip dist/*",
+    "release": "gh release create v1.0.0 ./dist/release.zip --title \"Release v1.0.0\" --generate-notes",
     "build": "vite build",
     "dev": "vite",
     "preview": "vite preview",
