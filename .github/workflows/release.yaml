@@ -1,18 +1,21 @@
-name: Release Drafter
+name: Create release
+
 on:
   push:
-    # 해당 브랜치에 푸쉬될 때 action 이 실행된다.
     branches:
-      - master
+      - gh-pages
+
+permissions:
+  contents: write
+
 jobs:
-  update_release_draft:
-    runs-on: ubuntu-latest
+  release:
+    name: Release pushed tag
+    runs-on: ubuntu-22.04
     steps:
-      - uses: release-drafter/release-drafter@v5
-        # (Optional)
-        # workflow 에서 여러 구성이 필요할 때 config-name 에 오버라이드 해줍니다.
-        # 반드시 .github/ 에 위치해야합니다.
-        with:
-          config-name: release-config.yml
+      - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+          tag: ${{ github.ref_name }}
+        run: |
+          gh release create --generate-notes --target gh-pages
