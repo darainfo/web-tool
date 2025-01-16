@@ -4,7 +4,7 @@
 
 ### Using a ready-made built (recommended)
 
-Download the latest release from the [releases page]([/releases "releases page"](https://github.com/darainfo/web-tool/releases/tag/v0.0.3)).
+Download the latest release from the [releases page](https://github.com/darainfo/web-tool/releases/).
 Open the index HTML file and explore the source code.
 
 ### Building yourself
