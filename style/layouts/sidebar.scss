@@ -11,7 +11,7 @@
   transition: left 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 
   .sidebar-menu-wrapper {
-    height: calc(100% - 58px);
+    height: calc(100% - 98px);
     padding: 0.5rem 0rem;
     border-right: 1px solid var(--#{$prefix}border-color);
 
@@ -19,6 +19,21 @@
       height: 40px;
       padding: 0rem 1rem;
       margin-bottom: 10px;
+    }
+
+    .sidebar-footer {
+      height: 40px;
+      padding: 0rem 1rem;
+      margin-bottom: 10px;
+      text-align: center;
+
+      > a > {
+        .bi-download,
+        .bi-github {
+          width: 1.6em;
+          height: 1.8em;
+        }
+      }
     }
 
     .sidebar-menu,
