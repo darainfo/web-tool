@@ -1,4 +1,4 @@
-import{m as s}from"./text-diff-5a65b7d5.js";import"./index-f8b46355.js";/*!-----------------------------------------------------------------------------
+import{m as s}from"./text-diff-2b79abfb.js";import"./index-43079bed.js";/*!-----------------------------------------------------------------------------
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Version: 0.52.0(f6dc0eb8fce67e57f6036f4769d92c1666cdf546)
  * Released under the MIT license
