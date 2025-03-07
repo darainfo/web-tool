@@ -17,29 +17,53 @@
               <div class="col-sm mb-3">
                 <div class="mb-3">
                   <div class="col-sm row">
-                    <label for="staticEmail" class="col-sm-4 col-form-label">Size</label>
+                    <label class="col-sm-4 col-form-label">Qr Char Size</label>
                     <div class="col-sm-8">
-                      <input type="number" id="size" class="form-control" value="0" step="128" max="1024" />
+                      <input type="number" v-model="qrMaxSize" class="form-control" step="100" max="2300" />
                     </div>
                   </div>
                 </div>
                 <textarea @input="textSize($event)" class="form-control" rows="9" id="qrText"></textarea>
-                <div class="mb-3 col-sm-12">
+                <div class="mb-3 col-sm-12 clearfix">
                   <div class="float-end">
                     <div class="mb-1">Char length : {{ qrTextSize }}</div>
 
                     <button @click="convert()" type="button" class="btn btn-light-secondary float-end">Convert</button>
+                    <div v-if="errorMessage != ''" style="clear: both; color: #ff0707; font-weight: bold">Error : {{ errorMessage }}</div>
                   </div>
                 </div>
               </div>
 
               <div class="col-sm">
+                <nav aria-label="Page navigation" v-if="imgIdx > 1">
+                  <div style="text-align: center">
+                    <a href="javascript:;" @click="viewPage('p')">&lt; Prev</a>
+                    <a href="javascript:;" @click="viewPage('n')" style="margin-left: 10px">Next &gt;</a>
+                  </div>
+
+                  <ul class="pagination justify-content-center" style="margin-top: 10px">
+                    <li class="page-item">
+                      <a class="page-link" @click="viewImg(1)">1</a>
+                    </li>
+                    <li v-for="n in pagingNums" class="page-item" :class="currentImgIdx == n ? 'active' : ''">
+                      <a class="page-link" href="javascript:;" @click="viewImg(n)">{{ n }}</a>
+                    </li>
+
+                    <li class="page-item">
+                      <a class="page-link" @click="viewImg(imgIdx)">{{ imgIdx }}</a>
+                    </li>
+                  </ul>
+                </nav>
+
                 <div class="mb-3" style="padding: 15px; width: 100%; min-height: 203px; overflow: auto; border: 1px solid #dddddd">
                   <canvas id="qrImageViewer"></canvas>
                 </div>
+
                 <div class="float-end">
                   <button @click="qrImgDownload()" type="button" class="btn btn btn-primary">download</button>
                 </div>
+                <div>View Qr Text</div>
+                <textarea class="form-control" rows="9" v-model="viewQrContent"></textarea>
               </div>
             </div>
           </form>
@@ -52,12 +76,29 @@
 <script>
 import { loadScript } from "@/utils/utils";
 
+function isNumeric(val) {
+  return /^-?\d+$/.test(val);
+}
+
 export default {
-  created() {},
+  mounted() {
+    let vtoolQrText = localStorage.getItem("vtoolQrText");
+
+    if (vtoolQrText) {
+      document.getElementById("qrText").value = vtoolQrText;
+    }
+  },
   data() {
     return {
       qrTextSize: 0,
       scriptLoaded: false,
+      errorMessage: "",
+      currentImgIdx: 0,
+      imgIdx: 0,
+      qrMaxSize: 2000,
+      pagingQrTextMap: {},
+      pagingNums: [],
+      viewQrContent: "",
     };
   },
   methods: {
@@ -82,21 +123,55 @@ export default {
     createQRCode() {
       let qrText = document.getElementById("qrText").value;
 
-      let qrOptions = { errorCorrectionLevel: "M" };
+      const MAX_CHAR_SIZE = this.qrMaxSize;
 
-      let size = document.getElementById("size").value;
+      localStorage.setItem("vtoolQrText", qrText);
 
-      if (size > 0) {
-        qrOptions.width = document.getElementById("size").value;
+      let reqText = "";
+      let imgIdx = 0;
+      let beforeChar = "";
+      let currChar = "";
+      let charCnt = 0;
+
+      let pagingQrTextMap = {};
+      for (let i = 0; i < qrText.length; i++) {
+        currChar = qrText.charAt(i);
+
+        if (beforeChar == "\n" && currChar == "\n") {
+          continue;
+        }
+
+        if (isNumeric(currChar)) {
+          charCnt++;
+        } else if (escape(currChar).length > 4) {
+          charCnt += 4;
+        } else {
+          charCnt += 2;
+        }
+
+        reqText += currChar;
+
+        if (charCnt > MAX_CHAR_SIZE) {
+          ++imgIdx;
+          pagingQrTextMap[imgIdx] = reqText;
+
+          charCnt = 0;
+          reqText = "";
+        }
+
+        beforeChar = currChar;
       }
 
-      QRCode.toCanvas(document.getElementById("qrImageViewer"), qrText, qrOptions, function (error) {
-        if (error) {
-          console.error(error);
-        } else {
-          console.log("QR code generated!");
-        }
-      });
+      if (reqText.length > 0) {
+        ++imgIdx;
+        pagingQrTextMap[imgIdx] = reqText;
+      }
+
+      this.pagingQrTextMap = pagingQrTextMap;
+
+      this.imgIdx = imgIdx;
+
+      this.viewImg(1);
     },
     qrImgDownload() {
       const canvas = document.getElementById("qrImageViewer");
@@ -104,6 +179,61 @@ export default {
       link.href = canvas.toDataURL("image/png"); // PNG 형식으로 데이터 URL 생성
       link.download = "canvas-image.png"; // 다운로드할 파일 이름
       link.click(); // 링크 클릭하여 다운로드
+    },
+
+    viewPage(mode) {
+      let viewImgIdx = 0;
+      if (mode == "n") {
+        viewImgIdx = this.currentImgIdx + 1;
+      } else {
+        viewImgIdx = this.currentImgIdx - 1;
+      }
+
+      viewImgIdx = viewImgIdx < 1 ? 1 : this.imgIdx <= viewImgIdx ? this.imgIdx : viewImgIdx;
+
+      this.viewImg(viewImgIdx);
+    },
+    // view image
+    viewImg(n) {
+      this.currentImgIdx = n;
+
+      let startImgIdx = 0,
+        endImgIdx = 0;
+
+      if (n < 5) {
+        startImgIdx = 1;
+      } else {
+        startImgIdx = n - 4;
+      }
+
+      if (startImgIdx + 9 >= this.imgIdx) {
+        endImgIdx = this.imgIdx;
+      } else {
+        endImgIdx = startImgIdx + 9;
+      }
+
+      startImgIdx = endImgIdx - startImgIdx == 9 ? startImgIdx : endImgIdx - 9;
+      startImgIdx = startImgIdx < 0 ? 1 : startImgIdx;
+
+      let pagingNums = [];
+      for (let i = startImgIdx; i <= endImgIdx; i++) {
+        pagingNums.push(i);
+      }
+      this.pagingNums = pagingNums;
+
+      let qrText = this.pagingQrTextMap[n];
+
+      this.viewQrContent = qrText;
+
+      QRCode.toCanvas(document.getElementById("qrImageViewer"), qrText, { errorCorrectionLevel: "M", width: 128, height: 128 }, (error) => {
+        //alert(error);
+        if (error) {
+          this.errorMessage = error.message;
+          console.error(error);
+        } else {
+          console.log("QR code generated!");
+        }
+      });
     },
   },
 };
