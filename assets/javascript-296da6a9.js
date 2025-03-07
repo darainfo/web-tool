@@ -1,4 +1,4 @@
-import{conf as t,language as e}from"./typescript-19753b4c.js";import"./text-diff-f24867b0.js";import"./index-7144a2b2.js";/*!-----------------------------------------------------------------------------
+import{conf as t,language as e}from"./typescript-14af976d.js";import"./text-diff-1a1fbee2.js";import"./index-b5b2928e.js";/*!-----------------------------------------------------------------------------
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Version: 0.52.0(f6dc0eb8fce67e57f6036f4769d92c1666cdf546)
  * Released under the MIT license

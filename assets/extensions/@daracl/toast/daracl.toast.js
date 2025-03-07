@@ -1,5 +1,5 @@
 /*!
-* @daracl/toast  v0.0.7
+* @daracl/toast  v0.0.8
 * Copyright 2023-2024 darainfo and other contributors; 
 * Licensed MIT
 */
@@ -4464,7 +4464,7 @@ var Toast = /*#__PURE__*/function () {
     }
   }]);
 }();
-_defineProperty(Toast, "VERSION", "0.0.7");
+_defineProperty(Toast, "VERSION", "0.0.8");
 
 }();
 __webpack_exports__ = __webpack_exports__["default"];
