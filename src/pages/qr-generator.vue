@@ -16,10 +16,18 @@
             <div class="row">
               <div class="col-sm mb-3">
                 <div class="mb-3">
-                  <div class="col-sm row">
+                  <div class="col-sm row mb-1">
                     <label class="col-sm-4 col-form-label">Qr Char Size</label>
                     <div class="col-sm-8">
                       <input type="number" v-model="qrMaxSize" class="form-control" step="100" max="2300" />
+                    </div>
+                  </div>
+                  <div class="col-sm row">
+                    <label class="col-sm-4 col-form-label">Qr Img Size</label>
+                    <div class="col-sm-8">
+                      <select v-model="qrImgSize" class="form-control">
+                        <option v-for="qrImgSizeItem in qrImgSizeItems" :value="qrImgSizeItem">{{ qrImgSizeItem }}</option>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -99,6 +107,8 @@ export default {
       pagingQrTextMap: {},
       pagingNums: [],
       viewQrContent: "",
+      qrImgSize: 512,
+      qrImgSizeItems: [128, 256, 512],
     };
   },
   methods: {
@@ -225,7 +235,7 @@ export default {
 
       this.viewQrContent = qrText;
 
-      QRCode.toCanvas(document.getElementById("qrImageViewer"), qrText, { errorCorrectionLevel: "M", width: 128, height: 128 }, (error) => {
+      QRCode.toCanvas(document.getElementById("qrImageViewer"), qrText, { errorCorrectionLevel: "M", width: this.qrImgSize }, (error) => {
         //alert(error);
         if (error) {
           this.errorMessage = error.message;
