@@ -1,0 +1,9 @@
+function u(e){navigator.clipboard.writeText(e)}function f(e){return e.split(`
+`).map(t=>t.trim().toLowerCase().split(/[\s-_]+/).map((n,r)=>r===0?n.toLowerCase():n.charAt(0).toUpperCase()+n.slice(1).toLowerCase()).join("")).join(`
+`)}function p(e){return e.split(`
+`).map(t=>t.toLowerCase().split(/\s+/).map(n=>n.charAt(0).toUpperCase()+n.slice(1).toLowerCase()).join("")).join(`
+`)}function C(e){return e.split(`
+`).map(t=>t.toLowerCase().split(/\s+/gm).map(n=>n.charAt(0).toUpperCase()+n.slice(1).toLowerCase()).join(" ")).join(`
+`)}function g(e){return e&&e.split(/([.!?])/).map((n,r)=>r%2===0?n.toLowerCase().replace(/(\s*)(\w)/,(i,a,s)=>a+s.toUpperCase()):n).join("").trim()}function m(e){if(!e)return e;const t=["a","an","and","are","as","at","but","by","for","if","in","nor","of","on","or","so","the","to","up","yet"];return e.split(/([.!?])/).map((r,i)=>i%2===0?r.split(" ").map((a,s)=>s===0?a.replace(/(\s*)(\w)/,(c,o,l)=>o+l.toUpperCase()):t.includes(a.toLowerCase())?a.toLowerCase():a.charAt(0).toUpperCase()+a.slice(1).toLowerCase()).join(" "):r).join("").trim()}function h(e){return e&&e.split(`
+`).map(t=>t.trim().replace(/([a-z])([A-Z])/g,"$1_$2").toLowerCase().replace(/\s+/g,"_").replace(/[^\w_]/g,"")).join(`
+`)}function j(e){if(!e)return{byte:0,length:0};let t=0;for(let n=0;n<e.length;n++){const r=e.charCodeAt(n);r<=127?t+=1:r<=2047?t+=2:r<=65535?t+=3:r<=1114111&&(t+=4)}return{byte:t,length:e.length}}function w(e){return/(\.jpg|\.jpeg|\.png|\.gif|\.bmp|\.webp|\.svg)$/i.test(e)}function L(e,t){const n=t*1024*1024;return e.size<=n}function x(e,t){let n=t.getFullYear()-e.getFullYear(),r=t.getMonth()-e.getMonth(),i=t.getDate()-e.getDate();r<0&&(n--,r+=12);const a=new Date(t.getFullYear(),t.getMonth(),0).getDate();return i<0&&(r--,i+=a,r<0&&(r+=12,n--)),{years:n,months:r,days:i}}export{C as a,g as b,m as c,h as d,p as e,x as f,j as g,L as h,w as i,u as j,f as t};
