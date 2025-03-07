@@ -124,6 +124,7 @@ export function toSnackCase(str) {
     .map((line) => {
       return line
         .trim()
+        .replace(/([a-z])([A-Z])/g, "$1_$2")
         .toLowerCase() // 소문자로 변환
         .replace(/\s+/g, "_") // 공백을 언더스코어로 대체
         .replace(/[^\w_]/g, ""); // 알파벳, 숫자, 언더스코어가 아닌 문자는 제거
