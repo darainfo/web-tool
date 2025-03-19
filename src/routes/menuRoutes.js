@@ -91,6 +91,13 @@ export const routes = [
           i18n: "menu.uuid_generate",
         },
       },
+      {
+        component: () => import("@/pages/util/unit-conversion.vue"),
+        path: "unitConversion",
+        meta: {
+          i18n: "menu.unit_conversion",
+        },
+      },
     ],
   },
 

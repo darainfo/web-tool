@@ -37,7 +37,7 @@
                   <input class="form-control mb-3" min="1" v-model="count" type="number" />
                 </template>
 
-                <div class="col-12 float-end mb-3" style="text-align: center">
+                <div class="col-12 mb-3" style="text-align: center">
                   <button type="button" class="btn btn-light-secondary btn-sm" @click="uuidGen()">Generate</button>
                 </div>
 

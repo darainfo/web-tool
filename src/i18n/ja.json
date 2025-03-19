@@ -16,6 +16,7 @@
     "remove_duplicates": "重複の削除",
     "util": "Utils",
     "uuid_generate": "UUID 生成",
+    "unit_conversion": "Unit Conversion",
     "date_calculation": "日付計算"
   },
   "not.found": "データが見つかりません",

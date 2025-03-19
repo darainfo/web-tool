@@ -16,6 +16,7 @@
     "remove_duplicates": "중복제거",
     "util": "Utils",
     "uuid_generate": "UUID 생성",
+    "unit_conversion": "단위 변환",
     "date_calculation": "날짜 계산"
   },
 
