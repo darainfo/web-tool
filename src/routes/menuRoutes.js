@@ -55,6 +55,14 @@ export const routes = [
     },
   },
   {
+    component: () => import("@/pages/json-pretty.vue"),
+    path: "/jsonPretty",
+    meta: {
+      i18n: "menu.json_pretty",
+    },
+  },
+
+  {
     component: () => import("@/pages/date-calculation.vue"),
     path: "/dateCalculation",
     meta: {
