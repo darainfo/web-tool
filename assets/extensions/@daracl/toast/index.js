@@ -55,7 +55,7 @@ function toastHiddenElement() {
   return document.getElementById("daraclToastHidden");
 }
 var Toast = class _Toast {
-  static VERSION = "0.0.8";
+  static VERSION = APP_VERSION;
   constructor(options) {
     if (typeof options === "string") {
       options = { items: options };
