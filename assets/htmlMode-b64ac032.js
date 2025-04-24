@@ -1,4 +1,4 @@
-import{m as ft}from"./text-diff-33b8eb46.js";import"./index-23bfb761.js";/*!-----------------------------------------------------------------------------
+import{m as ft}from"./text-diff-80bbd041.js";import"./index-5c148276.js";/*!-----------------------------------------------------------------------------
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Version: 0.52.0(f6dc0eb8fce67e57f6036f4769d92c1666cdf546)
  * Released under the MIT license
