@@ -25,7 +25,7 @@
 
                     <button type="button" class="btn btn-light-secondary btn-sm" @click="caseChange('screaming_snake')">SCREAMING_SNAKE_CASE</button>
 
-                    <button type="button" class="btn btn-light-secondary btn-sm" @click="caseChange('snack')">snack_case</button>
+                    <button type="button" class="btn btn-light-secondary btn-sm" @click="caseChange('snake')">snake_case</button>
 
                     <button type="button" class="btn btn-light-secondary btn-sm" @click="caseChange('kebab')">kebab-case</button>
 
@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { toCamelCase, toCapitalizedCase, toSentenceCase, toTitleCaseWithPunctuation, toSnackCase, toPascalCase } from "@/utils/common";
+import { toCamelCase, toCapitalizedCase, toSentenceCase, toTitleCaseWithPunctuation, toSnakeCase, toPascalCase } from "@/utils/common";
 
 import TextCopyButton from "@/components/button/TextCopyButton.vue";
 
@@ -89,14 +89,14 @@ export default {
         result = toSentenceCase(orginText);
       } else if (type == "title") {
         result = toTitleCaseWithPunctuation(orginText);
-      } else if (type == "snack") {
-        result = toSnackCase(orginText);
+      } else if (type == "snake") {
+        result = toSnakeCase(orginText);
       } else if (type == "pascal") {
         result = toPascalCase(orginText);
       } else if (type == "screaming_snake") {
-        result = toSnackCase(orginText).toUpperCase();
+        result = toSnakeCase(orginText).toUpperCase();
       } else if (type == "kebab") {
-        result = toSnackCase(orginText).replaceAll(/_/g, "-");
+        result = toSnakeCase(orginText).replaceAll(/_/g, "-");
       }
 
       this.resultText = result;

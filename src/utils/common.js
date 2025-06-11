@@ -116,7 +116,7 @@ export function toTitleCaseWithPunctuation(str) {
   return sentences.join("").trim();
 }
 
-export function toSnackCase(str) {
+export function toSnakeCase(str) {
   if (!str) return str; // 빈 문자열 처리
 
   return str
