@@ -18,7 +18,8 @@
     "uuid_generate": "UUID 生成",
     "unit_conversion": "Unit Conversion",
     "date_calculation": "日期计算",
-    "json_pretty": "JSON pretty"
+    "json_pretty": "JSON pretty",
+    "text_compression": "文字压缩"
   },
   "not.found": "数据未找到",
   "prev": "上一页",

@@ -45,6 +45,13 @@ export const routes = [
           i18n: "menu.remove_duplicates",
         },
       },
+      {
+        component: () => import("@/pages/text/text-compression.vue"),
+        path: "textCompression",
+        meta: {
+          i18n: "text-compression",
+        },
+      },
     ],
   },
   {
@@ -75,6 +82,15 @@ export const routes = [
     path: "/qrGenerator",
     meta: {
       i18n: "menu.qr_qenerator",
+    },
+  },
+
+  {
+    component: () => import("@/pages/qr-zip-generator.vue"),
+    path: "/qrZipGenerator",
+    meta: {
+      i18n: "menu.qr_qenerator",
+      hideMenu: true,
     },
   },
 

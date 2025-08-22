@@ -18,7 +18,8 @@
     "uuid_generate": "UUID 생성",
     "unit_conversion": "단위 변환",
     "date_calculation": "날짜 계산",
-    "json_pretty": "JSON pretty"
+    "json_pretty": "JSON pretty",
+    "text_compression": "글자 압축"
   },
 
   "not.found": "데이터가 없습니다",

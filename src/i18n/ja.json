@@ -18,7 +18,8 @@
     "uuid_generate": "UUID 生成",
     "unit_conversion": "Unit Conversion",
     "date_calculation": "日付計算",
-    "json_pretty": "JSON pretty"
+    "json_pretty": "JSON pretty",
+    "text_compression": "文字圧縮"
   },
   "not.found": "データが見つかりません",
   "prev": "前へ",

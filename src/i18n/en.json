@@ -18,7 +18,8 @@
     "uuid_generate": "UUID Generator",
     "unit_conversion": "Unit Conversion",
     "date_calculation": "Date calculation",
-    "json_pretty": "JSON pretty"
+    "json_pretty": "JSON pretty",
+    "text_compression": "Text Compression"
   },
 
   "not.found": "Data not found",

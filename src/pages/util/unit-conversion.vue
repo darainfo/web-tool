@@ -14,24 +14,43 @@
           <form id="mainForm">
             <div class="row">
               <div class="col-12">
-                <select v-model="unitType" class="form-control mb-3">
-                  <option v-for="(item, key) in unitItems" :value="item.type" :key="key">{{ item.name }}</option>
-                </select>
+                <input class="form-control mb-3" min="0" v-model="sourceValue" @change="conversion" type="number" />
 
-                <input class="form-control mb-3" min="0" v-model="sourceValue" type="number" />
                 <div class="col-12">
                   <template v-for="(item, key) in unitItems">
-                    <div class="form-check form-check-inline" :key="key" v-if="item.type != unitType">
-                      <input class="form-check-input" type="radio" @click="conversion(item)" v-model="conversionType" :value="item.type" name="conversionUnit" :id="'delimiter' + key" />
-                      <label class="form-check-label ckk-near" :for="'delimiter' + key">{{ item.name }}</label>
+                    <div class="form-check form-check-inline" :key="key" v-if="true">
+                      <label class="form-check-label" @change="conversion">
+                        <input class="form-check-input" type="radio" v-model="sourceType" :value="item.type" name="sourceType" />
+                        {{ item.name }}
+                      </label>
                     </div>
                   </template>
                 </div>
 
-                <input class="form-control mb-3" min="0" v-model="conversionValue" type="text" />
+                <h5 class="col-12" style="margin-top: 20px">
+                  Conversion <span style="font-weight: bold; color: red">{{ errorMessage }}</span>
+                </h5>
 
-                <div class="float-end">
-                  <TextCopyButton :copyField="conversionValue" />
+                <div class="col-12">
+                  <table>
+                    <colgroup>
+                      <col style="width: 130px" />
+                      <col style="width: *" />
+                    </colgroup>
+                    <template v-for="(item, key) in unitItems">
+                      <tr :key="key" v-if="item.type != sourceType">
+                        <td>
+                          {{ item.name }}
+                        </td>
+                        <td>
+                          <span class="input-group mb-3">
+                            <input class="form-control" :value="item.value" readonly />
+                            <span class="input-group-text" style="width: 50px">{{ item.type }}</span>
+                          </span>
+                        </td>
+                      </tr>
+                    </template>
+                  </table>
                 </div>
               </div>
             </div>
@@ -47,59 +66,59 @@ import TextCopyButton from "@/components/button/TextCopyButton.vue";
 
 const unitItems = [
   {
-    type: "px",
-    fn: (item) => {
-      return "";
-    },
-    name: "픽셀 [px]",
-  },
-  {
     type: "in",
-    fn: (item) => {
-      return "";
-    },
     name: "인치 [in]",
+    value: "0",
   },
   {
-    type: "cm",
-    fn: (item) => {
-      return "";
-    },
-    name: "센티미터[cm]",
+    type: "px",
+    name: "픽셀 [px]",
+    value: "0",
   },
   {
     type: "mm",
-    fn: (item) => {
-      return "";
-    },
     name: "밀리미터 [mm]",
+    value: "0",
+  },
+  {
+    type: "cm",
+    name: "센티미터[cm]",
+    value: "0",
   },
   {
     type: "m",
-    fn: (item) => {
-      return "";
-    },
     name: "미터 [m]",
+    value: "0",
+  },
+  {
+    type: "km",
+    name: "킬로미터 [km]",
+    value: "0",
   },
   {
     type: "ft",
-    fn: (item) => {
-      return "";
-    },
     name: "피트 [ft]",
+    value: "0",
+  },
+  {
+    type: "yd",
+    name: "야드 [yd]",
+    value: "0",
+  },
+  {
+    type: "mi",
+    name: "마일 [mi]",
+    value: "0",
   },
 ];
 
 export default {
-  components: {
-    TextCopyButton,
-  },
   data() {
     return {
-      unitType: "cm",
-      conversionType: "px",
+      sourceType: "cm",
+      targetType: "px",
       sourceValue: 1,
-      conversionValue: "",
+      errorMessage: "",
       changeStr: "",
       unitItems,
     };
@@ -107,15 +126,50 @@ export default {
 
   methods: {
     conversion() {
-      const unitType = this.unitType;
-
-      const item = unitItems.find((item) => item.type === unitType);
-
       try {
-        this.conversionValue = item.fn(this.sourceValue);
+        const unitItems = this.unitItems;
+
+        const sourceValue = this.sourceValue;
+        const sourceType = this.sourceType;
+
+        for (let unitItem of unitItems) {
+          unitItem.value = this.convertUnit(sourceValue, sourceType, unitItem.type);
+        }
       } catch (e) {
-        this.conversionValue = e.message;
+        this.errorMessage = e.message;
       }
+    },
+    convertUnit(value, fromUnit, toUnit, precision = 6) {
+      const inchConversions = {
+        in: 1,
+        cm: 2.54,
+        mm: 25.4,
+        m: 0.0254,
+        km: 0.0000254,
+        ft: 1 / 12,
+        yd: 1 / 36,
+        mi: 1 / 63360,
+        px: 96, // 웹 기준 DPI
+      };
+
+      fromUnit = fromUnit.toLowerCase();
+      toUnit = toUnit.toLowerCase();
+
+      if (!(fromUnit in inchConversions)) {
+        throw new Error(`Unsupported 'from' unit: ${fromUnit}`);
+      }
+      if (!(toUnit in inchConversions)) {
+        throw new Error(`Unsupported 'to' unit: ${toUnit}`);
+      }
+
+      // Step 1: Convert from source unit to inches
+      const valueInInches = value / inchConversions[fromUnit];
+
+      // Step 2: Convert from inches to target unit
+      const result = valueInInches * inchConversions[toUnit];
+
+      // Step 3: Round result to desired precision
+      return Number(result.toFixed(precision));
     },
   },
 };
