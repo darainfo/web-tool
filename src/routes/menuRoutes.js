@@ -49,7 +49,7 @@ export const routes = [
         component: () => import("@/pages/text/text-compression.vue"),
         path: "textCompression",
         meta: {
-          i18n: "text-compression",
+          i18n: "menu.text_compression",
         },
       },
     ],
